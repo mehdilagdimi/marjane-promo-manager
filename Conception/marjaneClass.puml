@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Person
+
+
+User <|-- Admin
+Admin <|-- SuperAdmin
+
+class Person {
+    Integer id
+    String fullname
+    String email
+    String passw
+    login()
+}
+
+class Admin {
+    managePromotions()
+}
+
+class SuperAdmin {
+    manageAccounts()
+}
+
+class Category {
+    Integer id
+    String name
+}
+class Product {
+    Integer id
+    String name
+}
+
+class Center {
+    Integer id
+    String city
+}
+
+class Promotion {
+    Integer id
+    Timestamp validUntil
+}
+
+class exemptedFromPromotion {
+    Integer id
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+@enduml
