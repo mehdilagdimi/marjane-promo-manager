@@ -3,9 +3,20 @@
 
 abstract class Person
 
-
-User <|-- Admin
+'Inheritance
+Person <|-- Admin
 Admin <|-- SuperAdmin
+
+'Aggregation
+Category o-- Product
+Center *-- Admin
+
+Category "0..1" - "0..*" Promotion
+Product "0..1" - "0..*" Promotion
+
+'This needs to be changed to many-to-many relationship
+'in case a product can belong to more than one category
+Product "0..1" - "0..*" exemptedFromPromotion
 
 class Person {
     Integer id
@@ -26,10 +37,14 @@ class SuperAdmin {
 class Category {
     Integer id
     String name
+    Getters()
+    Setters()
 }
 class Product {
     Integer id
     String name
+    Getters()
+    Setters()
 }
 
 class Center {
@@ -39,17 +54,16 @@ class Center {
 
 class Promotion {
     Integer id
+    String applyOn
     Timestamp validUntil
+    Getters()
+    Setters()
 }
 
 class exemptedFromPromotion {
     Integer id
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
+
 
 @enduml
