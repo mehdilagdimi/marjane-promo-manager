@@ -1,24 +1,27 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class Person
 
 'Inheritance
 Person <|-- Admin
+Person <|-- SectionManager
 Admin <|-- SuperAdmin
 
 'Aggregation
-Category o-- Product
+Category o-- SubCategory
+Category o-- SectionManager
+'Composition
 Center *-- Admin
 
 Category "0..1" - "0..*" Promotion
-Product "0..1" - "0..*" Promotion
+SubCategory "0..1" - "0..*" Promotion
+SectionManager "0..*" - "0..1" Promotion
 
 'This needs to be changed to many-to-many relationship
 'in case a product can belong to more than one category
 Product "0..1" - "0..*" exemptedFromPromotion
 
-class Person {
+abstract class Person {
     Integer id
     String fullname
     String email
@@ -27,11 +30,15 @@ class Person {
 }
 
 class Admin {
-    managePromotions()
+    createPromotions()
 }
 
 class SuperAdmin {
     manageAccounts()
+}
+
+class SectionManager{
+    managePromotions()
 }
 
 class Category {
@@ -40,7 +47,7 @@ class Category {
     Getters()
     Setters()
 }
-class Product {
+class SubCategory {
     Integer id
     String name
     Getters()
@@ -54,8 +61,10 @@ class Center {
 
 class Promotion {
     Integer id
+    Float percentage
     String applyOn
     Timestamp validUntil
+    created_at
     Getters()
     Setters()
 }
