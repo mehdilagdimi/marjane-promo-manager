@@ -3,19 +3,21 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.entity;
 
 
 
-public class SuperAdmin extends Manager {
+public final class SuperAdmin extends Manager {
 
-    public SuperAdmin(){
-        super();
+    private static SuperAdmin superAdmin = null;
+
+    private SuperAdmin(){
+
     }
-
-    public SuperAdmin(int id, String fullname, String email, String passw) {
-        super(id, fullname, email, passw);
-    }
-
-    public SuperAdmin(String fullname, String email, String passw) {
+    private SuperAdmin(String fullname, String email, String passw) {
         super(fullname, email, passw);
     }
 
+    public static SuperAdmin getInstance(){
+        if(superAdmin == null) superAdmin = new SuperAdmin();
+
+        return superAdmin;
+    }
 
 }
