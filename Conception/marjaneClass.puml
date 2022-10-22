@@ -13,14 +13,15 @@ Category o-- SectionManager
 'Composition
 Center *-- Admin
 
-Category "0..1" - "0..*" Promotion
-SubCategory "0..1" - "0..*" Promotion
+'Category "0..1" - "0..*" Promotion
+
+SubCategory "0..*" - "0..*" Promotion
 SectionManager "0..*" - "0..1" Promotion
 
 'This needs to be changed to many-to-many relationship
 'in case a product can belong to more than one category
-SubCategory "0..1" - "0..*" exemptedFromPromotion
-Promotion "0..*" - "1" exemptedFromPromotion
+'SubCategory "0..1" - "0..*" exemptedFromPromotion
+'Promotion "0..*" - "1" exemptedFromPromotion
 
 
 abstract class Person {
@@ -64,15 +65,10 @@ class Center {
 class Promotion {
     Integer id
     Float percentage
-    String applyOn
     Timestamp validUntil
     created_at
     Getters()
     Setters()
-}
-
-class exemptedFromPromotion {
-    Integer id
 }
 
 

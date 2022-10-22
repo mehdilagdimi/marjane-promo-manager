@@ -16,26 +16,22 @@ public class Promotion {
     @Column(nullable = false)
     private float percentage;
 
-    @Column(nullable = false)
-    private String applyOn = "cat";
 
     @Column(nullable = false)
     private Timestamp validUntil;
     @Column(nullable = false)
     private Timestamp created_at = Timestamp.from(Instant.now());
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subCategory_id", referencedColumnName = "id")
-    SubCategory subCategory;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "subcategory_promotion",
+            joinColumns = @JoinColumn(name = "subcategory_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "promotion_id", referencedColumnName = "id")
+    )
+    List<Category> subCategoryList;
 
 
-//    @ManyToOne
-//    @JoinColumn(name = "promotion_id", referencedColumnName = "id")
-//    List<ExemptedFromPromotion> exemptedFromPromotion;
 
     public int getId() {
         return id;
@@ -67,5 +63,16 @@ public class Promotion {
 
     public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
+    }
+
+    public Promotion addSubCategory(Category subCategory){
+        subCategoryList.add(subCategory);
+        subCategory.addPromotion(this);
+        return this;
+    }
+    public Promotion removeSubCategory(Category subCategory){
+        subCategoryList.remove(subCategory);
+        subCategory.removePromotion(this);
+        return this;
     }
 }

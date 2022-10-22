@@ -8,7 +8,6 @@ import java.util.Properties;
 
 public final class HibernateUtil {
     private static SessionFactory sessionFactory;
-    private static Session session;
     private static final Properties properties;
     static {
 

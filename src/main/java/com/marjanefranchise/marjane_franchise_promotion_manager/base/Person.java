@@ -8,9 +8,9 @@ import java.io.Serializable;
 public abstract class Person implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
-    @Column (nullable = false)
+    @Column (nullable = false, length = 200)
     protected String fullname;
-    @Column (nullable = false)
+    @Column (nullable = false, length = 150)
     protected String email;
     @Column (nullable = false)
     protected String passw;
