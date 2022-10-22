@@ -8,7 +8,6 @@ public final class SuperAdmin extends Manager {
     private static SuperAdmin superAdmin = null;
 
     private SuperAdmin(){
-
     }
     private SuperAdmin(String fullname, String email, String passw) {
         super(fullname, email, passw);

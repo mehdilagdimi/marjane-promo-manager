@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 
 @Entity
@@ -14,12 +15,27 @@ public class Promotion {
     private int id;
     @Column(nullable = false)
     private float percentage;
-    @Column(nullable = false)
 
+    @Column(nullable = false)
+    private String applyOn = "cat";
+
+    @Column(nullable = false)
     private Timestamp validUntil;
     @Column(nullable = false)
-
     private Timestamp created_at = Timestamp.from(Instant.now());
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subCategory_id", referencedColumnName = "id")
+    SubCategory subCategory;
+
+
+//    @ManyToOne
+//    @JoinColumn(name = "promotion_id", referencedColumnName = "id")
+//    List<ExemptedFromPromotion> exemptedFromPromotion;
 
     public int getId() {
         return id;

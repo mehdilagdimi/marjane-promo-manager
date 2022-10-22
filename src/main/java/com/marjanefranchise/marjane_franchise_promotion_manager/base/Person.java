@@ -1,20 +1,19 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.base;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Table;
 
 import java.io.Serializable;
 
 @MappedSuperclass
 public abstract class Person implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    protected int id;
     @Column (nullable = false)
-    private String fullname;
+    protected String fullname;
     @Column (nullable = false)
-    private String email;
+    protected String email;
     @Column (nullable = false)
-    private String passw;
+    protected String passw;
 
 
     public Person () {

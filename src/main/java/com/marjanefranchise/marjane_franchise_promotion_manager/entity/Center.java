@@ -8,8 +8,7 @@ public class Center {
     private int id;
     private String city;
 
-    @OneToOne
-    @JoinColumn(name = "center_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "center", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Manager manager;
 
     public Manager getManager() {

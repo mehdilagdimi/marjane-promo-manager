@@ -9,8 +9,13 @@ import java.io.Serializable;
 @Entity @Table(name ="manager")
 public class Manager extends Person implements Serializable {
 
-    @Column(nullable = false)
-    private boolean role = false;
+
+//    @Column(nullable = false)
+//    private boolean role = false;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @MapsId
+    Center center;
 
 
     public Manager(){
@@ -25,11 +30,11 @@ public class Manager extends Person implements Serializable {
         super(fullname, email, passw);
     }
 
-    public boolean getRole() {
-        return role;
-    }
-
-    public void setRole(boolean role) {
-        this.role = role;
-    }
+//    public boolean getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(boolean role) {
+//        this.role = role;
+//    }
 }

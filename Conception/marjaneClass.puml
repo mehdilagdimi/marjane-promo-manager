@@ -19,7 +19,9 @@ SectionManager "0..*" - "0..1" Promotion
 
 'This needs to be changed to many-to-many relationship
 'in case a product can belong to more than one category
-Product "0..1" - "0..*" exemptedFromPromotion
+SubCategory "0..1" - "0..*" exemptedFromPromotion
+Promotion "0..*" - "1" exemptedFromPromotion
+
 
 abstract class Person {
     Integer id
