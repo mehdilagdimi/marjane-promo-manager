@@ -12,7 +12,6 @@ public class Manager extends Person implements Serializable {
 
 //    @Column(nullable = false)
 //    private boolean role = false;
-
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId
     @JoinColumn(name = "center_id")

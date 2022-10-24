@@ -19,16 +19,19 @@ public class CategoryDao {
         session.persist(category);
         transaction.commit();
     }
-    public void addSubCategory(){
+    public void addSubCategory(int category_id){
         Session session = HibernateUtil.openSession();
         Transaction transaction = session.getTransaction();
         transaction.begin();
-        Category category = session.find(Category.class, 6);
+        Category category = session.find(Category.class, category_id);
+        System.out.println(" printing parent " + category.getId());
         Category subCategory = new Category();
         subCategory.setName("Laptop");
+//        subCategory.setParent(category);
         category.addSubCategory(subCategory);
         System.out.println(" adding sub category  ");
-        session.persist(subCategory);
+        session.persist(category);
         transaction.commit();
     }
+
 }

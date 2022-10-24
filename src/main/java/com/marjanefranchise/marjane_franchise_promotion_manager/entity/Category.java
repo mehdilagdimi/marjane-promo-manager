@@ -24,7 +24,7 @@ public class Category  implements Serializable {
     @JoinColumn(name = "parent_id")
     private Category parent = null;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Category> subCategories = new ArrayList<>();
 
 
@@ -114,7 +114,7 @@ public class Category  implements Serializable {
 
     public Category addSubCategory(Category subCategory){
         subCategories.add(subCategory);
-        setParent(this);
+        subCategory.setParent(this);
         return this;
     }
     public Category removeSubCategory(Category subCategory){

@@ -9,5 +9,6 @@ class HibernateUtilTest {
     void testDBConnectionThroughHibernate() {
         assertTrue(HibernateUtil.isConnected());
         System.out.println(" Connected to DB successfully ");
+
     }
 }

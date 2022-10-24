@@ -16,8 +16,8 @@ class CategoryDaoTest {
     @Test
     public void testInsertSubCategory(){
         CategoryDao categoryDao = new CategoryDao();
-        System.out.println(" adding electronics ");
-        categoryDao.addSubCategory();
+        System.out.println(" adding laptops ");
+        categoryDao.addSubCategory(16);
     }
 
 }
