@@ -8,14 +8,14 @@ Person <|-- SectionManager
 Admin <|-- SuperAdmin
 
 'Aggregation
-Category o-- SubCategory
+'Category o-- SubCategory
 Category o-- SectionManager
 'Composition
 Center *-- Admin
 
 'Category "0..1" - "0..*" Promotion
 
-SubCategory "0..*" - "0..*" Promotion
+Category "0..*" - "0..*" Promotion
 SectionManager "0..*" - "0..1" Promotion
 
 'This needs to be changed to many-to-many relationship
@@ -46,16 +46,18 @@ class SectionManager{
 
 class Category {
     Integer id
+    Integer parent_id
     String name
     Getters()
     Setters()
 }
-class SubCategory {
-    Integer id
-    String name
-    Getters()
-    Setters()
-}
+
+'class SubCategory {
+'    Integer id
+'    String name
+'    Getters()
+'    Setters()
+'}
 
 class Center {
     Integer id
@@ -66,6 +68,8 @@ class Promotion {
     Integer id
     Float percentage
     Timestamp validUntil
+    status
+    comment
     created_at
     Getters()
     Setters()

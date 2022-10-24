@@ -1,5 +1,6 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.util.HibernateUtil;
 
+import com.marjanefranchise.marjane_franchise_promotion_manager.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -26,6 +27,13 @@ public final class HibernateUtil {
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
 //        properties.setProperty(" hibernate.connection.pool_size", "10");
         configuration.setProperties(properties);
+        configuration
+//                .addPackage("com.marjanefranchise.marjane_franchise_promotion_manager.entity")
+                .addAnnotatedClass(Category.class)
+                .addAnnotatedClass(Center.class)
+                .addAnnotatedClass(Manager.class)
+                .addAnnotatedClass(SectionManager.class)
+                .addAnnotatedClass(Promotion.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties()).build();

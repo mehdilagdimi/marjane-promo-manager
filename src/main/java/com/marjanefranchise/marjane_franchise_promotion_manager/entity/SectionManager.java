@@ -8,8 +8,9 @@ import java.util.List;
 @Entity
 public class SectionManager extends Person {
 
-    @OneToOne(mappedBy = "sectionManager", fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @MapsId
+    @JoinColumn(name = "category_id")
     Category category;
 
 

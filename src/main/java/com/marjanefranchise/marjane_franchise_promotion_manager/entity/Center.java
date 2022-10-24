@@ -9,6 +9,7 @@ public class Center {
     private String city;
 
     @OneToOne(mappedBy = "center", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
     Manager manager;
 
     public Manager getManager() {

@@ -17,6 +17,7 @@ public final class Config {
     private  static String USER;
     private  static String PASSWORD;
 
+    private static String DBNAME;
 
     static {
 //        try{
@@ -27,6 +28,7 @@ public final class Config {
         Config.setURL(dotenv.get("URL"));
         Config.setUSER(dotenv.get("USER"));
         Config.setPASSWORD(dotenv.get("PASSW"));
+        Config.setDBNAME(dotenv.get("DBNAME"));
         System.out.println(" URL " + dotenv.get("URL"));
 //            Context env = (Context)new InitialContext().lookup("java:comp/env");
 //            DIALECT = (String) env.lookup("DIALECT");
@@ -40,6 +42,13 @@ public final class Config {
 //        }
     }
 
+    public static String getDBNAME() {
+        return DBNAME;
+    }
+
+    public static void setDBNAME(String DBNAME) {
+        Config.DBNAME = DBNAME;
+    }
 
     public static String getDIALECT() {
         return DIALECT;

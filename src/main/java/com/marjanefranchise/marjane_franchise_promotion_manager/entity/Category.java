@@ -2,11 +2,12 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Table(name = "category")
-public class Category  {
+public class Category  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,11 +17,12 @@ public class Category  {
     private String name;
 
     @OneToOne(mappedBy = "category", fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
     private SectionManager sectionManager;
 
     @ManyToOne()
     @JoinColumn(name = "parent_id")
-    private Category parent;
+    private Category parent = null;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Category> subCategories = new ArrayList<>();
@@ -98,6 +100,16 @@ public class Category  {
 
     public void setPromotion(List<Promotion> promotionList) {
         this.promotionList = promotionList;
+    }
+
+    public Category addCategory(Category category){
+        subCategories.add(category);
+        setParent(null);
+        return this;
+    }
+    public Category removeCategory(Category category){
+        subCategories.remove(category);
+        return this;
     }
 
     public Category addSubCategory(Category subCategory){

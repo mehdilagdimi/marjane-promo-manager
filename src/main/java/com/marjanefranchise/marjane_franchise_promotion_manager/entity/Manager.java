@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 
-@MappedSuperclass
 @Entity @Table(name ="manager")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Manager extends Person implements Serializable {
 
 
@@ -15,6 +15,7 @@ public class Manager extends Person implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId
+    @JoinColumn(name = "center_id")
     Center center;
 
 

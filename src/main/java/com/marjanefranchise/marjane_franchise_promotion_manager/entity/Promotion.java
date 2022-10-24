@@ -19,6 +19,12 @@ public class Promotion {
 
     @Column(nullable = false)
     private Timestamp validUntil;
+
+    @Column(nullable = false)
+    private String status = "en cours";
+
+    @Column()
+    private String comment;
     @Column(nullable = false)
     private Timestamp created_at = Timestamp.from(Instant.now());
 
