@@ -3,6 +3,7 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.util.HibernateU
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -12,6 +13,9 @@ import java.util.Properties;
 public final class HibernateUtil {
 
     private static SessionFactory sessionFactory;
+    private static Session session = null;
+    private static Transaction transaction = null;
+
     private static final Configuration configuration ;
     private static final Properties properties;
 
@@ -43,15 +47,33 @@ public final class HibernateUtil {
 //                buildSessionFactory();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
     }
+    public static Session getSession() {
+        if(session != null) return session;
+        return openSession();
+    }
+
+    public static void setSession(Session session) {
+        HibernateUtil.session = session;
+    }
+
+     public static Transaction getTransaction() {
+            return getSession().getTransaction();
+        }
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
     public static Session openSession() {
-        return sessionFactory.openSession();
+        session = sessionFactory.openSession();
+        return session;
     }
 
     public static boolean isConnected(){
         return openSession().isConnected();
+    }
+
+
+    public static void closeSession(){
+        session.close();
     }
 }
