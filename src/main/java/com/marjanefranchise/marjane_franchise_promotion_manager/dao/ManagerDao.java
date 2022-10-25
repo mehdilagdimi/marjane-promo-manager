@@ -3,12 +3,9 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.dao;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.DaoBase;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.TransactionExecuterFI;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.TransactionGetExecuterFI;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Category;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
-import com.marjanefranchise.marjane_franchise_promotion_manager.util.HibernateUtil.HibernateUtil;
 import com.marjanefranchise.marjane_franchise_promotion_manager.util.HibernateUtil.TransactionExecuter;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -54,7 +51,4 @@ public class ManagerDao extends TransactionExecuter implements DaoBase<Manager> 
         expression = (s -> s.remove(manager));
         executeTransaction(expression);
     }
-
-
-
 }

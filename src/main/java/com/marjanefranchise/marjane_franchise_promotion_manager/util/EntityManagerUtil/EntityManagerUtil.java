@@ -1,4 +1,4 @@
-//package com.marjanefranchise.marjane_franchise_promotion_manager.util.HibernateUtil;
+package com.marjanefranchise.marjane_franchise_promotion_manager.util.EntityManagerUtil;//package com.marjanefranchise.marjane_franchise_promotion_manager.util.HibernateUtil;
 //
 //import jakarta.persistence.EntityManagerFactory;
 //import jakarta.persistence.spi.PersistenceUnitInfo;

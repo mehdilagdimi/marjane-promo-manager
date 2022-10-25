@@ -14,10 +14,10 @@ class CategoryDaoTest {
 
     @Test
     public void testInsertCategory(){
-        CategoryDao categoryDao = new CategoryDao();
-        System.out.println(" adding electronics ");
+        DaoExecuter<Category> categoryDao = new DaoExecuter<>(Category.class);
+//        System.out.println(" adding electronics ");
         Category category = new Category();
-        category.setName("Electronics");
+        category.setName("Nutrition");
         category.setParent(null);
         categoryDao.save(category);
     }
