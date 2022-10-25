@@ -25,6 +25,7 @@ public class Category  implements Serializable {
     private Category parent = null;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, orphanRemoval = true)
+//    @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Category> subCategories = new ArrayList<>();
 
 

@@ -8,19 +8,18 @@ import org.hibernate.Session;
 import java.util.List;
 
 public class DaoExecuter<T> extends TransactionExecuter{
-    private Class<T> type;
+    private Class<? extends T> type;
     String typeStr;
     TransactionExecuterFI<Session> expression;
     TransactionGetExecuterFI<Session, T> getExpression;
     TransactionGetExecuterFI<Session, List<T>> getListExpression;
     public DaoExecuter(Class<T> beanImpl){
         type = beanImpl;
-        typeStr = type.getClass().toString();
+        typeStr = type.getClass().getSimpleName();
     }
 
     public T get(int id){
         getExpression = (s -> s.get(type, id));
-//        getExpression = (s -> s.get(Category.class, id));
         return (T) executeTransaction(getExpression);
     }
 
@@ -30,9 +29,10 @@ public class DaoExecuter<T> extends TransactionExecuter{
     }
 
     public List<T> getAll(){
-//        Class<T> clss;
+        System.out.println(" type " + typeStr);
+        System.out.println(" type get class " + type.getClass().toString());
         getListExpression = (s -> (List<T>) s.createQuery("SELECT m FROM "+ typeStr +" m", type.getClass()).getResultList());
-        return null;
+        return (List<T>) executeTransaction(getListExpression);
     }
 
     public void save(T jpaBean){
@@ -49,41 +49,4 @@ public class DaoExecuter<T> extends TransactionExecuter{
         expression = (s -> s.remove(jpaBean));
         executeTransaction(expression);
     }
-
-//    public void addCategory(){
-////        Transaction transaction = session.getTransaction();
-//        session.getTransaction().begin();
-//        Category category = new Category();
-//        category.setName("Electronics");
-//        category.setParent(null);
-//        category.addCategory(category);
-//        System.out.println(" adding electo ");
-//        session.persist(category);
-////        transaction.commit();
-//        session.getTransaction().commit();
-//    }
-//
-//    public void addSubCategory(int category_id){
-//        Transaction transaction = session.getTransaction();
-//        try{
-//            transaction.begin();
-//            Category category = session.find(Category.class, category_id);
-//            System.out.println(" printing parent " + category.getId());
-//            Category subCategory = new Category();
-//            subCategory.setName("Laptop");
-//    //        subCategory.setParent(category);
-//            category.addSubCategory(subCategory);
-//            System.out.println(" adding sub category  ");
-//            session.persist(category);
-//            transaction.commit();
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        } finally {
-//            if(transaction.isActive()){
-//                transaction.rollback();
-//            }
-//            session.close();
-//        }
-//    }
-
 }

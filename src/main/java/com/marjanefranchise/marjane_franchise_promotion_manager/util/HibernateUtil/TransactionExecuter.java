@@ -22,7 +22,7 @@ public abstract class TransactionExecuter<T> {
             if(transaction.isActive()){
                 transaction.rollback();
             }
-            HibernateUtil.closeSession();
+//            HibernateUtil.closeSession();
         }
     }
     public T executeTransaction(TransactionGetExecuterFI transactionGetExpression){
@@ -41,7 +41,7 @@ public abstract class TransactionExecuter<T> {
             if(transaction.isActive()){
                 transaction.rollback();
             }
-            HibernateUtil.closeSession();
+//            HibernateUtil.closeSession();
         }
         return obj;
     }

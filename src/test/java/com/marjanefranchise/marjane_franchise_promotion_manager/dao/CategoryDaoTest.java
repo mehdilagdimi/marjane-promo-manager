@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,20 +22,34 @@ class CategoryDaoTest {
         category.setParent(null);
         categoryDao.save(category);
     }
+
+    @Test
+    Category testFindCategory(int id) {
+        if(id == 0) id = 19;
+        DaoExecuter<Category> daoExecuter = new DaoExecuter<>(Category.class);
+        Category category = daoExecuter.find(id);
+        System.out.println(" category name " + category.getName());
+        assertEquals("Nutrition", category.getName());
+        return category;
+    }
+
     @Test
     public void testInsertSubCategory(){
-        Session session = HibernateUtil.getSession() != null ? HibernateUtil.getSession() : HibernateUtil.openSession();
-//        session.createQuery()
-//        CategoryDao categoryDao = new CategoryDao();
-//        System.out.println(" adding laptops ");
-//         = session.createCriteria(Category.class);
-//        YourObject yourObject = criteria.add(Restrictions.eq("yourField", yourFieldValue))
-//                .uniqueResult();
-//        Category subCategory = new Category();
-//        subCategory.setName("Laptop");
-//        subCategory.setParent(category);
-//        category.addSubCategory(subCategory);
+        DaoExecuter<Category> daoExecuter = new DaoExecuter<>(Category.class);
+        Category category = testFindCategory(19);
+        Category subCategory = new Category();
+        subCategory.setName("Fruits");
+        subCategory.setParent(category);
+        category.addSubCategory(subCategory);
+        daoExecuter.save(category);
 //        categoryDao.addSubCategory(16);
+    }
+    @Test
+    public void testGetAllCategory(){
+        DaoExecuter<Category> daoExecuter = new DaoExecuter<>(Category.class);
+        List<Category> listCategories = daoExecuter.getAll();
+        listCategories.forEach(System.out::print);
+    //        categoryDao.addSubCategory(16);
     }
 
 }
