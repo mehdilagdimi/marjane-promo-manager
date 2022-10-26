@@ -12,6 +12,7 @@ Admin <|-- SuperAdmin
 Category o-- SectionManager
 'Composition
 Center *-- Admin
+Center *-- SectionManager
 
 'Category "0..1" - "0..*" Promotion
 

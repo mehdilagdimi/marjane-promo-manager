@@ -2,6 +2,7 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.dao;
 
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.TransactionExecuterFI;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.TransactionGetExecuterFI;
+import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Category;
 import com.marjanefranchise.marjane_franchise_promotion_manager.util.HibernateUtil.TransactionExecuter;
 import org.hibernate.Session;
 

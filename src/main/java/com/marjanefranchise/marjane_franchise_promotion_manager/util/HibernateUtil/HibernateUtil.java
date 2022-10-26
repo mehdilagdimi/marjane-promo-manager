@@ -32,7 +32,6 @@ public final class HibernateUtil {
 //        properties.setProperty(" hibernate.connection.pool_size", "10");
         configuration.setProperties(properties);
         configuration
-//                .addPackage("com.marjanefranchise.marjane_franchise_promotion_manager.entity")
                 .addAnnotatedClass(Category.class)
                 .addAnnotatedClass(Center.class)
                 .addAnnotatedClass(Manager.class)

@@ -2,40 +2,63 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.controller;
 
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanSetterFI;
 import com.marjanefranchise.marjane_franchise_promotion_manager.dao.DaoExecuter;
+import jakarta.servlet.http.HttpServletRequest;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.stream.IntStream;
 
-public class BeanController<T> {
+public class BeanController{
 
-    private DaoExecuter daoExecuter;
+    private static DaoExecuter daoExecuter = new DaoExecuter<>();
 
-    public BeanController(){
-        daoExecuter = new DaoExecuter<>();
-    }
 
-    public T find(int id, Class<T> beanImpl){
+    public static<T> T find(int id, Class<T> beanImpl){
         daoExecuter.setType(beanImpl);
         return (T) daoExecuter.find(id);
     }
 
-    public void add(T bean, Class<T> beanImpl){
+    //pass request and get params values to set them into bean
+    public static<T> T add(T bean, Class<T> beanImpl, String[] params, List<BeanSetterFI> beanSetters)  {
         daoExecuter.setType(beanImpl);
-        daoExecuter.save(bean);
-    }
-
-    public void update(T bean, Class<T> beanImpl, String[] params, BeanSetterFI[] beanSetters){
-        daoExecuter.setType(beanImpl);
-
         IntStream.range(0, params.length).forEachOrdered(i -> {
-            beanSetters[i].set(params[i]);
+            System.out.println(" parm " + params[i]);
+            beanSetters.get(i).set(bean);
         });
-
-        daoExecuter.update(bean);
-    }
-
-    public void delete(T bean, Class<T> beanImpl){
-        daoExecuter.setType(beanImpl);
+        System.out.println(" jpa ");
+        bean.toString();
+        System.out.println(" end jpa ");
         daoExecuter.save(bean);
+        return bean;
     }
+
+//    public static<T> void update(T bean, Class<T> beanImpl, String[] params, BeanSetterFI[] beanSetters, HttpServletRequest request){
+//        daoExecuter.setType(beanImpl);
+//
+//        IntStream.range(0, params.length).forEachOrdered(i -> {
+//            beanSetters[i].set(request.getParameter(params[i]));
+//        });
+//
+//        daoExecuter.update(bean);
+//    }
+//    public static<T1, T2> void updateBean(T1 bean, Class<T1> beanImpl, List<T2> params, BeanSetterFI[] beanSetters, HttpServletRequest request){
+//        daoExecuter.setType(beanImpl);
+//
+//        IntStream.range(0, beanSetters.length).forEachOrdered(i -> {
+//            beanSetters[i].set(params.get(i));
+//        });
+//
+//        daoExecuter.update(bean);
+//    }
+//    public static<T1, T2> void updateBean(T1 bean, Class<T1> beanImpl, T2 param, BeanSetterFI beanSetter){
+//        daoExecuter.setType(beanImpl);
+//        beanSetter.set(param);
+//        daoExecuter.update(bean);
+//    }
+//
+//    public static<T> void delete(T bean, Class<T> beanImpl){
+//        daoExecuter.setType(beanImpl);
+//        daoExecuter.save(bean);
+//    }
 
 }

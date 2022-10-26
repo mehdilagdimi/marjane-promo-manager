@@ -8,6 +8,10 @@ import java.util.List;
 @Entity
 public class SectionManager extends Person {
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "center_id", referencedColumnName = "id")
+    Center center;
+
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "category_id")

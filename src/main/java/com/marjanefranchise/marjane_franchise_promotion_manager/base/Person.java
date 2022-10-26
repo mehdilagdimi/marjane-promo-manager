@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @MappedSuperclass
 public abstract class Person implements Serializable {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
     @Column (nullable = false, length = 200)
