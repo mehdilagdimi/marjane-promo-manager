@@ -12,10 +12,18 @@ public class DaoExecuter<T> extends TransactionExecuter{
     String typeStr;
     TransactionExecuterFI<Session> expression;
     TransactionGetExecuterFI<Session, T> getExpression;
+
+
     TransactionGetExecuterFI<Session, List<T>> getListExpression;
+    public DaoExecuter() {
+
+    }
     public DaoExecuter(Class<T> beanImpl){
         type = beanImpl;
         typeStr = type.getClass().getSimpleName();
+    }
+    public void setType(Class<? extends T> type) {
+        this.type = type;
     }
 
     public T get(int id){
@@ -40,7 +48,7 @@ public class DaoExecuter<T> extends TransactionExecuter{
         executeTransaction(expression);
     }
 
-    public void update(T jpaBean, String params[]){
+    public void update(T jpaBean){
         expression = (s -> s.merge(jpaBean));
         executeTransaction(expression);
     }

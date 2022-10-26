@@ -27,7 +27,7 @@ class CategoryDaoTest {
     Category testFindCategory(int id) {
         if(id == 0) id = 19;
         DaoExecuter<Category> daoExecuter = new DaoExecuter<>(Category.class);
-        Category category = daoExecuter.find(id);
+        Category category = daoExecuter.find(id);;
         System.out.println(" category name " + category.getName());
         assertEquals("Nutrition", category.getName());
         return category;
