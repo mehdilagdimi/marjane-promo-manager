@@ -1,5 +1,6 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.base;
 
+import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Category;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Center;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
 
@@ -7,45 +8,48 @@ import java.util.*;
 
 public abstract class BeanLambdaSetters {
 
-    private static List<BeanSetterFI> managerSettersAsLambdas;
-//    private static List<BeanSetterFI> categorySettersAsLambdas = new ArrayList<>();
-//    BeanSetterFI<Manager> beanSetFullName = m -> m.setFullname((String)request.getAttribute("fullname"));
     private static Manager manager;
-    private static BeanSetterFI<String> beanSetFullName;
-    private static BeanSetterFI<String> beanSetEmail;
-    private static BeanSetterFI<String> beanSetPassword ;
-    private static BeanSetterFI<Center> beanSetCenter;
-    private static Map<String,  List<BeanSetterFI>> allBeansSettersAsLambda;
+    private static Category category;
+    private static List<BeanSetterFI> beanSettersAsLambdas;
 
-
-    public static void setAllBeansSettersAsLambda (){
-        allBeansSettersAsLambda = new HashMap<>(Map.ofEntries(
-                Map.entry("Manager", managerSettersAsLambdas)
-//                Map.entry("Category", managerSettersAsLambdas)
-        ));
-    }
+//    public static void setAllBeansSettersAsLambda (){
+//        allBeansSettersAsLambda = new HashMap<>(Map.ofEntries(
+//                Map.entry("Manager", managerSettersAsLambdas)
+//        ));
+//    }
     public static List<BeanSetterFI> getBeanLambdaSetters(String bean){
-            return allBeansSettersAsLambda.get(bean);
+        return beanSettersAsLambdas;
     }
 
     public static void setManagerReference (Manager managerRef){
         manager = managerRef;
-        updateManagerRef();
     }
-    public static void updateManagerRef(){
-        beanSetFullName = manager::setFullname;
-        beanSetEmail = manager::setEmail;
-        beanSetPassword = manager::setPassw;
-        beanSetCenter = manager::setCenter;
+    public static void setCategoryReference (Category categoryRef){
+        category = categoryRef;
+    }
+    public static void setManagerSetters(){
+        BeanSetterFI<String> beanSetFullName = manager::setFullname;
+        BeanSetterFI<String> beanSetEmail = manager::setEmail;
+        BeanSetterFI<String> beanSetPassword = manager::setPassw;
+        BeanSetterFI<Center> beanSetCenter = manager::setCenter;
 
-        managerSettersAsLambdas = new ArrayList<>(Arrays.asList(
+        beanSettersAsLambdas = new ArrayList<>(Arrays.asList(
                 beanSetFullName,
                 beanSetEmail,
                 beanSetPassword,
                 beanSetCenter
         ));
-
-        //always reupdate new references t
-        setAllBeansSettersAsLambda();
     }
+    public static void setCategorySetters(){
+        BeanSetterFI<String> beanSetFullName = category::setName;
+        BeanSetterFI<Category> beanSetEmail = category::setParent;
+
+
+        beanSettersAsLambdas = new ArrayList<>(Arrays.asList(
+                beanSetFullName,
+                beanSetEmail
+        ));
+    }
+
+
 }
