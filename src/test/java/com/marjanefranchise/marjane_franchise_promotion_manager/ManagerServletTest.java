@@ -553,6 +553,10 @@ class ManagerServletTest extends HttpServlet {
                 return null;
             }
         };
+        request.setAttribute("center_id", "3");
+        request.setAttribute("fullname", "lagdimimehdi3");
+        request.setAttribute("email", "lagdimi.mehdi3@gmail.com");
+        request.setAttribute("passw", "1234");
         assertDoesNotThrow(() ->{ managerServlet.doPost(request, response);});
 
 

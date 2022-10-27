@@ -52,7 +52,6 @@ class DaoExecuterTest {
         if(id == 0) id = 1;
         DaoExecuter<Center> daoExecuter = new DaoExecuter<>(Center.class);
         Center center = daoExecuter.find(id);;
-//        System.out.println(" center city " + center.getCity());
         return center;
     }
 
@@ -62,6 +61,7 @@ class DaoExecuterTest {
         DaoExecuter<Center> daoExecuter = new DaoExecuter<>(Center.class);
         Center center = daoExecuter.find(id);;
         System.out.println(" center city " + center.getCity());
+//        System.out.println(" class " + Center.class.getSimpleName());
         assertEquals("Safi", center.getCity());
     }
 

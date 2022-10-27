@@ -2,6 +2,7 @@ package com.marjanefranchise.marjane_franchise_promotion_manager;
 
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanSetterFI;
 import com.marjanefranchise.marjane_franchise_promotion_manager.controller.BeanController;
+import com.marjanefranchise.marjane_franchise_promotion_manager.controller.ManagerController;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Center;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
 import jakarta.servlet.*;
@@ -15,42 +16,27 @@ import java.util.List;
 
 @WebServlet(name = "ManagerServlet", value = "/ManagerServlet")
 public class ManagerServlet extends HttpServlet {
+    private ManagerController managerController;
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        managerController = new ManagerController();
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("center_id", 5);
         request.setAttribute("fullname", "lagdimimehdi");
         request.setAttribute("email", "lagdimi.mehdi@gmail.com");
         request.setAttribute("passw", "1234");
-        String[] params = {"fullname", "email", "passw","center"};
-
-
-        Manager manager = new Manager();
-        //set manager on center entity before adding center to manager and creating it(manager)
-        Center center = BeanController.find(2, Center.class);
-        BeanSetterFI<Manager> beanSetFullName = m -> m.setFullname("lagdimimehdi");
-        BeanSetterFI<Manager> beanSetEmail = m -> m.setEmail("lagdimi.mehdi@gmail.com");
-        BeanSetterFI<Manager> beanSetPassword = m -> m.setPassw("1234");
-        BeanSetterFI<Manager> beanSetCenter = m -> m.setCenter(center);
-        List<BeanSetterFI> beanSetters = new ArrayList<>(
-                Arrays.asList(
-                        beanSetFullName,
-                        beanSetEmail,
-                        beanSetPassword,
-                        beanSetCenter
-                )
-        );
-
+        request.setAttribute("center", null);
         System.out.println(" adding manager ");
-
-        Manager retManager = BeanController.add(manager, Manager.class, params, beanSetters);
-        System.out.println(" ret man" + retManager.getCenter().getCity());
-        System.out.println(" ret man" + retManager.getEmail());
-        System.out.println(" ret man" + retManager.getFullname());
-
+        managerController.addManager(request, "center_id","fullname", "email", "passw", "center");
     }
 }

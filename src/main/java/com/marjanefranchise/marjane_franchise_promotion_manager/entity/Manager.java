@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 @Entity @Table(name ="manager")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -37,6 +38,5 @@ public class Manager extends Person implements Serializable {
     public Center getCenter() {
         return center;
     }
-
 
 }
