@@ -19,6 +19,7 @@ public class ManagerController {
         Center center = BeanController.find((int)request.getAttribute(findFirst), Center.class);
         request.setAttribute("center", center);
 
+        //set this current manager object reference in BeanLambdaSetters class in order to get its corresponding setters as lambda expressions
         BeanLambdaSetters.setManagerReference(manager);
         BeanController.add(manager, Manager.class, request, params);
     }

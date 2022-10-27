@@ -1,9 +1,9 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.entity;
 
 
+import com.marjanefranchise.marjane_franchise_promotion_manager.base.Person;
 
-
-public final class SuperAdmin extends Manager {
+public final class SuperAdmin extends Person {
 
     private static SuperAdmin superAdmin = null;
 

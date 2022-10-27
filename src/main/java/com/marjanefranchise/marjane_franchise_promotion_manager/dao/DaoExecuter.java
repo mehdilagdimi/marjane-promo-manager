@@ -21,7 +21,7 @@ public class DaoExecuter<T> extends TransactionExecuter{
     }
     public DaoExecuter(Class<T> beanImpl){
         type = beanImpl;
-        typeStr = type.getClass().getSimpleName();
+        typeStr = type.getSimpleName();
     }
     public void setType(Class<? extends T> type) {
         this.type = type;
