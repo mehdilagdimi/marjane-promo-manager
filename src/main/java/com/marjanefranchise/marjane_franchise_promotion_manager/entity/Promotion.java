@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,9 +36,35 @@ public class Promotion {
             joinColumns = @JoinColumn(name = "subcategory_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "promotion_id", referencedColumnName = "id")
     )
-    List<Category> subCategoryList;
+    List<Category> subCategoryList = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name ="center_id", referencedColumnName = "id")
+    Center center;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Center getCenter() {
+        return center;
+    }
+
+    public void setCenter(Center center) {
+        this.center = center;
+    }
 
     public int getId() {
         return id;
@@ -74,6 +101,13 @@ public class Promotion {
     public Promotion addSubCategory(Category subCategory){
         subCategoryList.add(subCategory);
         subCategory.addPromotion(this);
+        return this;
+    }
+    public Promotion addSubCategory(List<Category> subCategories){
+        for(Category subCategory : subCategories){
+            subCategoryList.add(subCategory);
+            subCategory.addPromotion(this);
+        }
         return this;
     }
     public Promotion removeSubCategory(Category subCategory){

@@ -2,6 +2,7 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,10 +16,29 @@ public class Center {
     Manager manager;
 
     @OneToMany(mappedBy = "center", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<SectionManager> sectionManager;
+    List<SectionManager> sectionManager = new ArrayList<>();
+
+    @OneToMany(mappedBy = "center", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    List<Promotion> promotion = new ArrayList<>();
 
     public Manager getManager() {
         return manager;
+    }
+
+    public List<SectionManager> getSectionManager() {
+        return sectionManager;
+    }
+
+    public void setSectionManager(List<SectionManager> sectionManager) {
+        this.sectionManager = sectionManager;
+    }
+
+    public List<Promotion> getPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(List<Promotion> promotion) {
+        this.promotion = promotion;
     }
 
     public void setManager(Manager manager) {

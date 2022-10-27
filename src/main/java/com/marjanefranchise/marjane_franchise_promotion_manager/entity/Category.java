@@ -31,7 +31,7 @@ public class Category  implements Serializable {
 
 
     @ManyToMany(mappedBy = "subCategoryList", fetch = FetchType.LAZY)
-    private List<Promotion> promotionList;
+    private List<Promotion> promotionList = new ArrayList<>();
 
 
     public Category(){
