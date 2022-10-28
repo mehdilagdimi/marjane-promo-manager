@@ -45,6 +45,10 @@ public class BeanController{
 
         daoExecuter.update(bean);
     }
+    public static<T> void simpleUpdate(T bean, Class<T> beanImpl){
+        daoExecuter.setType(beanImpl);
+        daoExecuter.update(bean);
+    }
 
 //    public static<T1, T2> void updateBean(T1 bean, Class<T1> beanImpl, List<T2> params, BeanSetterFI[] beanSetters, HttpServletRequest request){
 //        daoExecuter.setType(beanImpl);

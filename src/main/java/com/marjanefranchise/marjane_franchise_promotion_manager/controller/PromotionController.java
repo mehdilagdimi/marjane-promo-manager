@@ -49,6 +49,16 @@ public class PromotionController<T> {
         BeanLambdaSetters.setBeanSetters(promotion);
         BeanController.add(promotion, Promotion.class, request, params);
     }
+    public void updatePromotionStatus(HttpServletRequest request){
+        Promotion promotion = (Promotion) request.getAttribute("promotion");
+        promotion.setStatus((String)request.getAttribute("status"));
+        BeanController.simpleUpdate(promotion, Promotion.class);
+    }
+    public void addPromotionComment(HttpServletRequest request){
+        Promotion promotion = (Promotion) request.getAttribute("promotion");
+        promotion.setComment((String)request.getAttribute("comment"));
+        BeanController.simpleUpdate(promotion, Promotion.class);
+    }
 
 
 

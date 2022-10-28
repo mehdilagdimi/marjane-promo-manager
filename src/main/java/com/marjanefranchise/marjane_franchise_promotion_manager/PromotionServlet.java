@@ -29,6 +29,9 @@ public class PromotionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //for testing doPost from direct browser requesting
+        doPost(request, response);
+
 
         if(request.getParameter("get") != null){
            if(request.getParameter("get").equals("all")){
@@ -56,19 +59,41 @@ public class PromotionServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Category category = BeanController.find(2, Category.class);
-        List<Category> listSubCategory = new ArrayList<>(Arrays.asList(
-                category
-        ));
+        if(request.getParameter("post")!= null){
+           String[] params = request.getParameter("post").split(",");
+            if(Arrays.stream(params).anyMatch(param -> param.equals("promotion"))){
+                Category category = BeanController.find(2, Category.class);
+                List<Category> listSubCategory = new ArrayList<>(Arrays.asList(
+                        category
+                ));
 
-        request.setAttribute("manager_id", 1);
-//        request.setAttribute("manager_id", request.getSession().getAttribute("user_id"));
-        request.setAttribute("percentage", 20f);
-        request.setAttribute("validUntil", Timestamp.from(Instant.now()));
-        request.setAttribute("listSubCategory", listSubCategory);
-//        request.setAttribute("center", null);
-        System.out.println(" ADDING PROMOTION ");
-        //CHECK IF ROLE IS MANAGER BEFORE CONTINUE
-        promotionController.addPromotion(request, "manager_id", "percentage", "validUntil", "listSubCategory", "center");
+                request.setAttribute("manager_id", 1);
+        //        request.setAttribute("manager_id", request.getSession().getAttribute("user_id"));
+                request.setAttribute("percentage", 20f);
+                request.setAttribute("validUntil", Timestamp.from(Instant.now()));
+                request.setAttribute("listSubCategory", listSubCategory);
+        //        request.setAttribute("center", null);
+                System.out.println(" ADDING PROMOTION ");
+                //CHECK IF ROLE IS MANAGER BEFORE CONTINUE
+                promotionController.addPromotion(request, "manager_id", "percentage", "validUntil", "listSubCategory", "center");
+            }
+            if (Arrays.stream(params).anyMatch(param -> param.equals("status"))){
+                if(request.getParameter("promotion")!= null){
+                    Promotion promotion = BeanController.find(1, Promotion.class);
+                    request.setAttribute("promotion", promotion);
+                    request.setAttribute("status", "accepter");
+                    promotionController.updatePromotionStatus(request);
+                }
+            }
+            if(Arrays.stream(params).anyMatch(param -> param.equals("comment"))){
+                if(request.getParameter("promotion")!= null){
+                    Promotion promotion = BeanController.find(1, Promotion.class);
+                    request.setAttribute("promotion", promotion);
+                    request.setAttribute("comment", "Quantité de stock suffisante : 80");
+                    promotionController.addPromotionComment(request);
+                }
+            }
+
+        }
     }
 }
