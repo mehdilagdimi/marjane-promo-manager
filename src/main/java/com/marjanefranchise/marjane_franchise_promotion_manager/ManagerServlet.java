@@ -31,9 +31,9 @@ public class ManagerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("center_id", 1);
-        request.setAttribute("fullname", "lagdimimehdi");
-        request.setAttribute("email", "lagdimi.mehdi@gmail.com");
+        request.setAttribute("center_id", 2);
+        request.setAttribute("fullname", "lagdimimehdi2");
+        request.setAttribute("email", "lagdimi.mehdi2@gmail.com");
         request.setAttribute("passw", "1234");
         request.setAttribute("center", null);
         System.out.println(" adding manager ");

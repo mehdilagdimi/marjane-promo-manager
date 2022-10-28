@@ -46,6 +46,7 @@ public class PromotionServlet extends HttpServlet {
         request.setAttribute("listSubCategory", listSubCategory);
 //        request.setAttribute("center", null);
         System.out.println(" ADDING PROMOTION ");
+        //CHECK IF ROLE IS MANAGER BEFORE CONTINUE
         promotionController.addPromotion(request, "manager_id", "percentage", "validUntil", "listSubCategory", "center");
     }
 }

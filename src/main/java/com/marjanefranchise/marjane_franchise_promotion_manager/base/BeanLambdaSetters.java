@@ -33,42 +33,14 @@ public abstract class BeanLambdaSetters {
     public static void setCategoryReference (Category categoryRef){
         category = categoryRef;
     }
-    public static void setManagerSetters(){
-        BeanSetterFI<String> beanSetFullName = manager::setFullname;
-        BeanSetterFI<String> beanSetEmail = manager::setEmail;
-        BeanSetterFI<String> beanSetPassword = manager::setPassw;
-        BeanSetterFI<Center> beanSetCenter = manager::setCenter;
-
-        beanSettersAsLambdas = new ArrayList<>(Arrays.asList(
-                beanSetFullName,
-                beanSetEmail,
-                beanSetPassword,
-                beanSetCenter
-        ));
+    public static<T extends getBeanSettersFI> void setBeanSetters(T bean){
+        beanSettersAsLambdas = new ArrayList<>();
+        for(int i = 0; i < bean.getSetters().size(); i++){
+            beanSettersAsLambdas.add((BeanSetterFI)bean.getSetters().get(i));
+        }
     }
-    public static void setPromotionSetters(){
-        BeanSetterFI<Float> beanSetPercentage = promotion::setPercentage;
-        BeanSetterFI<Timestamp> beanSetValidUntil = promotion::setValidUntil;
-        BeanSetterFI<List<Category>> beanSetSubCategory = promotion::addSubCategory;
-        BeanSetterFI<Center> beanSetCenter = promotion::setCenter;
-
-        beanSettersAsLambdas = new ArrayList<>(Arrays.asList(
-                beanSetPercentage,
-                beanSetValidUntil,
-                beanSetSubCategory,
-                beanSetCenter
-        ));
-    }
-    public static void setCategorySetters(){
-        BeanSetterFI<String> beanSetFullName = category::setName;
-        BeanSetterFI<Category> beanSetParent = category::setParent;
 
 
-        beanSettersAsLambdas = new ArrayList<>(Arrays.asList(
-                beanSetFullName,
-                beanSetParent
-        ));
-    }
 
 
 }

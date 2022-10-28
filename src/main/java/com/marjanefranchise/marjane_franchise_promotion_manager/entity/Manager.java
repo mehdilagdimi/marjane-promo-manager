@@ -2,16 +2,16 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.entity;
 
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanSetterFI;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.Person;
+import com.marjanefranchise.marjane_franchise_promotion_manager.base.getBeanSettersFI;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Entity @Table(name ="manager")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Manager extends Person implements Serializable {
+public class Manager extends Person implements Serializable, getBeanSettersFI {
 //    @Column(nullable = false)
 //    private boolean role = false;
     @OneToOne(fetch = FetchType.LAZY)
@@ -37,6 +37,22 @@ public class Manager extends Person implements Serializable {
 
     public Center getCenter() {
         return center;
+    }
+
+    @Override
+    public List<BeanSetterFI> getSetters(){
+        List<BeanSetterFI> beanSettersAsLambdas;
+        BeanSetterFI<String> beanSetFullName = this::setFullname;
+        BeanSetterFI<String> beanSetEmail = this::setEmail;
+        BeanSetterFI<String> beanSetPassword = this::setPassw;
+        BeanSetterFI<Center> beanSetCenter = this::setCenter;
+        beanSettersAsLambdas = new ArrayList<>(Arrays.asList(
+                beanSetFullName,
+                beanSetEmail,
+                beanSetPassword,
+                beanSetCenter
+        ));
+        return beanSettersAsLambdas;
     }
 
 }

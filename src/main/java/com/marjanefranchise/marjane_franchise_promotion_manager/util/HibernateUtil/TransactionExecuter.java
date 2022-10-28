@@ -46,22 +46,4 @@ public abstract class TransactionExecuter<T> {
         return obj;
     }
 
-//    public void executeTransaction(TransactionGetExecuterFI transactionExpression){
-//        Transaction transaction = null;
-//        try{
-//            transaction = HibernateUtil.getSession().getTransaction();
-//
-//            transaction.begin();
-//            transactionExpression.accept(HibernateUtil.getSession());
-//            transaction.commit();
-//
-//        } catch (RuntimeException e){
-//            e.printStackTrace();
-//        } finally {
-//            if(transaction.isActive()){
-//                transaction.rollback();
-//            }
-//            HibernateUtil.closeSession();
-//        }
-//    }
 }

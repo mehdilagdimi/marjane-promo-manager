@@ -17,7 +17,7 @@ public class ManagerController {
 
         //set this current manager object reference in BeanLambdaSetters class in order to get its corresponding setters as lambda expressions
         BeanLambdaSetters.setManagerReference(manager);
-        BeanLambdaSetters.setManagerSetters();
+        BeanLambdaSetters.setBeanSetters(manager);
         BeanController.add(manager, Manager.class, request, params);
     }
 

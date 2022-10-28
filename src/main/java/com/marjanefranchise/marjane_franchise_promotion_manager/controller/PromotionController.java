@@ -18,8 +18,10 @@ public class PromotionController {
 
         //set this current manager object reference in BeanLambdaSetters class in order to get its corresponding setters as lambda expressions
         BeanLambdaSetters.setPromotionReference(promotion);
-        BeanLambdaSetters.setPromotionSetters();
+        BeanLambdaSetters.setBeanSetters(promotion);
         BeanController.add(promotion, Promotion.class, request, params);
     }
+
+
 
 }
