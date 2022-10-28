@@ -1,9 +1,6 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.base;
 
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Category;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Center;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Promotion;
+import com.marjanefranchise.marjane_franchise_promotion_manager.entity.*;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -11,6 +8,7 @@ import java.util.*;
 public abstract class BeanLambdaSetters {
 
     private static Manager manager;
+    private static SectionManager sectionManager;
     private static Promotion promotion;
     private static Category category;
     private static List<BeanSetterFI> beanSettersAsLambdas;
@@ -26,6 +24,9 @@ public abstract class BeanLambdaSetters {
 
     public static void setManagerReference (Manager managerRef){
         manager = managerRef;
+    }
+    public static void setSectionManagerReference (SectionManager sectionManagerRef){
+        sectionManager = sectionManagerRef;
     }
     public static void setPromotionReference (Promotion promotionRef){
         promotion = promotionRef;

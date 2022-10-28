@@ -133,4 +133,14 @@ public class Category  implements Serializable {
         promotionList.remove(promotion);
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", parent=" + parent +
+//                ", subCategories=" + subCategories +
+                '}';
+    }
 }

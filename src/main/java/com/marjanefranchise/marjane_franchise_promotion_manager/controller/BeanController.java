@@ -18,6 +18,11 @@ public class BeanController{
         daoExecuter.setType(beanImpl);
         return (T) daoExecuter.find(id);
     }
+    public static<T> List<T> getAll(Class<T> beanImpl){
+        daoExecuter.setType(beanImpl);
+        return (List<T>) daoExecuter.getAll();
+    }
+
 
     //pass request and get params values to set them into bean
     public static<T> T add(T bean, Class<T> beanImpl, HttpServletRequest request, String... params)  {

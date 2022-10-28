@@ -55,4 +55,13 @@ public class Manager extends Person implements Serializable, getBeanSettersFI {
         return beanSettersAsLambdas;
     }
 
+    @Override
+    public String toString() {
+        return "Manager{" +
+//                "center=" + center +
+                ", id=" + id +
+                ", fullname='" + fullname + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

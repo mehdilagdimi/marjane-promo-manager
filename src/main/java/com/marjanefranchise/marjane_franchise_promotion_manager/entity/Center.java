@@ -60,4 +60,15 @@ public class Center {
     public void setCity(String city) {
         this.city = city;
     }
+
+    @Override
+    public String toString() {
+        return "Center{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+//                ", manager=" + manager +
+//                ", sectionManager=" + sectionManager +
+//                ", promotion=" + promotion +
+                '}';
+    }
 }

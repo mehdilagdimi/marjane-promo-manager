@@ -136,4 +136,16 @@ public class Promotion implements getBeanSettersFI {
         ));
         return beanSettersAsLambdas;
     }
+
+    @Override
+    public String toString() {
+        return "Promotion{" +
+                "id=" + id +
+                ", percentage=" + percentage +
+                ", validUntil=" + validUntil +
+                ", status='" + status + '\'' +
+                ", comment='" + comment + '\'' +
+                ", created_at=" + created_at +
+                '}';
+    }
 }

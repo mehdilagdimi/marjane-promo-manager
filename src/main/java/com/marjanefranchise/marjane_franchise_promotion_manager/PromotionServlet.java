@@ -29,7 +29,29 @@ public class PromotionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
+
+        if(request.getParameter("get") != null){
+           if(request.getParameter("get").equals("all")){
+               //check conencted user role
+//               int id = request.getSession("user_id");
+               int id = 1;
+               //if role is manager then
+//               if(request.getSession().getAttribute("role").equals("manager")){
+                   List<Promotion> promotionList = promotionController.getAllForManager(id);
+//               }
+//                else if(request.getSession().getAttribute("role").equals("sectionmanager")){
+//                    if(promotionController.checkAuthorizedAcessForManager()){
+//                        List<Promotion> promotionList promotionController.getAllForSectionManager(id);
+//                    } else {
+//                        System.out.println(" Unauthorizd access promotions list : View of promotions only availabe btwn 8-12 ");
+//                    }
+//               }
+               System.out.println(" getting promotions ");
+               promotionList.forEach(System.out::println);
+           }
+        }
+        //THIS IS FOR TESTING ADDING MANAGER REQUESTING THROUW BROWSER
+//        doPost(request, response);
     }
 
     @Override
