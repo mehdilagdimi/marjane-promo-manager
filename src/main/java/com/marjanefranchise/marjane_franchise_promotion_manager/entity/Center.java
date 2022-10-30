@@ -11,7 +11,7 @@ public class Center {
     private int id;
     private String city;
 
-    @OneToOne(mappedBy = "center", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "center", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 //    @PrimaryKeyJoinColumn
     Manager manager;
 

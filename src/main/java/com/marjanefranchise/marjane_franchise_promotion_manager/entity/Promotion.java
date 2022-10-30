@@ -7,9 +7,7 @@ import jakarta.persistence.*;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -120,21 +118,21 @@ public class Promotion implements getBeanSettersFI {
     }
 
     @Override
-    public List<BeanSetterFI> getSetters(){
-        List<BeanSetterFI> beanSettersAsLambdas;
+    public Map<String, BeanSetterFI> getSetters(){
+        Map<String, BeanSetterFI> beanSettersAsLambdasMap;
 
         BeanSetterFI<Float> beanSetPercentage = this::setPercentage;
         BeanSetterFI<Timestamp> beanSetValidUntil = this::setValidUntil;
         BeanSetterFI<List<Category>> beanSetSubCategory = this::addSubCategory;
         BeanSetterFI<Center> beanSetCenter = this::setCenter;
 
-        beanSettersAsLambdas = new ArrayList<>(Arrays.asList(
-                beanSetPercentage,
-                beanSetValidUntil,
-                beanSetSubCategory,
-                beanSetCenter
+        beanSettersAsLambdasMap = new HashMap<>(Map.ofEntries(
+                Map.entry("percentage", beanSetPercentage),
+                Map.entry("validUntil", beanSetValidUntil),
+                Map.entry("subcategories", beanSetSubCategory),
+                Map.entry("center", beanSetCenter)
         ));
-        return beanSettersAsLambdas;
+        return beanSettersAsLambdasMap;
     }
 
     @Override

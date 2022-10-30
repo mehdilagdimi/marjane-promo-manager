@@ -2,6 +2,7 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.controller;
 
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanLambdaSetters;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanSetterFI;
+import com.marjanefranchise.marjane_franchise_promotion_manager.base.getBeanSettersFI;
 import com.marjanefranchise.marjane_franchise_promotion_manager.dao.DaoExecuter;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -25,22 +26,24 @@ public class BeanController{
 
 
     //pass request and get params values to set them into bean
-    public static<T> T add(T bean, Class<T> beanImpl, HttpServletRequest request, String... params)  {
+    public static<T extends getBeanSettersFI> T add(T bean, Class<T> beanImpl, HttpServletRequest request, String... params)  {
         daoExecuter.setType(beanImpl);
 
-        IntStream.range(0, params.length).forEachOrdered( i -> {
-            BeanLambdaSetters.getBeanLambdaSetters(bean.getClass().getSimpleName()).get(i).set(request.getAttribute(params[i]));
+        IntStream.range(0, params.length).forEach( i -> {
+            BeanLambdaSetters.getBeanLambdaSetters(bean).get(params[i]).set(request.getAttribute(params[i]));
+//            BeanLambdaSetters.getBeanLambdaSetters(bean.getClass().getSimpleName()).get(i).set(request.getAttribute(params[i]));
         });
 
         daoExecuter.save(bean);
         return bean;
     }
 
-    public static<T> void update(T bean, Class<T> beanImpl, String[] params, BeanSetterFI[] beanSetters, HttpServletRequest request){
+    public static<T extends getBeanSettersFI> void update(T bean, Class<T> beanImpl, String[] params, BeanSetterFI[] beanSetters, HttpServletRequest request){
         daoExecuter.setType(beanImpl);
 
-        IntStream.range(0, params.length).forEachOrdered(i -> {
-            beanSetters[i].set(request.getParameter(params[i]));
+        IntStream.range(0, params.length).forEach(i -> {
+            BeanLambdaSetters.getBeanLambdaSetters(bean).get(params[i]).set(request.getAttribute(params[i]));
+//            beanSetters[i].set(request.getParameter(params[i]));
         });
 
         daoExecuter.update(bean);

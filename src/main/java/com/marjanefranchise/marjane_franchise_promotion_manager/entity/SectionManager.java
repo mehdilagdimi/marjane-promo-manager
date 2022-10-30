@@ -5,9 +5,7 @@ import com.marjanefranchise.marjane_franchise_promotion_manager.base.Person;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.getBeanSettersFI;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class SectionManager extends Person implements getBeanSettersFI {
@@ -60,20 +58,21 @@ public class SectionManager extends Person implements getBeanSettersFI {
     }
 
     @Override
-    public List<BeanSetterFI> getSetters() {
-        List<BeanSetterFI> beanSettersAsLambdas;
+    public Map<String, BeanSetterFI> getSetters(){
+        Map<String, BeanSetterFI> beanSettersAsLambdasMap;
         BeanSetterFI<String> beanSetFullName = this::setFullname;
         BeanSetterFI<String> beanSetEmail = this::setEmail;
         BeanSetterFI<String> beanSetPassword = this::setPassw;
         BeanSetterFI<Center> beanSetCenter = this::setCenter;
         BeanSetterFI<Category> beanSetCategory = this::setCategory;
-        beanSettersAsLambdas = new ArrayList<>(Arrays.asList(
-                beanSetFullName,
-                beanSetEmail,
-                beanSetPassword,
-                beanSetCenter,
-                beanSetCategory
+
+        beanSettersAsLambdasMap = new HashMap<>(Map.ofEntries(
+                Map.entry("fullname", beanSetFullName),
+                Map.entry("email", beanSetEmail),
+                Map.entry("passw", beanSetPassword),
+                Map.entry("center", beanSetCenter),
+                Map.entry("category", beanSetCategory)
         ));
-        return beanSettersAsLambdas;
+        return beanSettersAsLambdasMap;
     }
 }

@@ -40,19 +40,23 @@ public class Manager extends Person implements Serializable, getBeanSettersFI {
     }
 
     @Override
-    public List<BeanSetterFI> getSetters(){
-        List<BeanSetterFI> beanSettersAsLambdas;
+    public Map<String, BeanSetterFI> getSetters(){
+        Map<String, BeanSetterFI> beanSettersAsLambdasMap;
+
         BeanSetterFI<String> beanSetFullName = this::setFullname;
         BeanSetterFI<String> beanSetEmail = this::setEmail;
         BeanSetterFI<String> beanSetPassword = this::setPassw;
         BeanSetterFI<Center> beanSetCenter = this::setCenter;
-        beanSettersAsLambdas = new ArrayList<>(Arrays.asList(
-                beanSetFullName,
-                beanSetEmail,
-                beanSetPassword,
-                beanSetCenter
+
+
+        beanSettersAsLambdasMap = new HashMap<>(Map.ofEntries(
+                Map.entry("fullname", beanSetFullName),
+                Map.entry("email", beanSetEmail),
+                Map.entry("passw", beanSetPassword),
+                Map.entry("center", beanSetCenter)
+
         ));
-        return beanSettersAsLambdas;
+        return beanSettersAsLambdasMap;
     }
 
     @Override

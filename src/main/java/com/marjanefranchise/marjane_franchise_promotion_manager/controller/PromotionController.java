@@ -14,6 +14,10 @@ import java.util.stream.Collectors;
 
 public class PromotionController<T> {
 
+    public List<Promotion> getAll(){
+        return BeanController.getAll(Promotion.class);
+    }
+
     public List<Promotion> getAllForManager(int id){
        Manager manager = BeanController.find(id, Manager.class);
 
@@ -45,7 +49,6 @@ public class PromotionController<T> {
         request.setAttribute("center", center);
 
         //set this current manager object reference in BeanLambdaSetters class in order to get its corresponding setters as lambda expressions
-        BeanLambdaSetters.setPromotionReference(promotion);
         BeanLambdaSetters.setBeanSetters(promotion);
         BeanController.add(promotion, Promotion.class, request, params);
     }

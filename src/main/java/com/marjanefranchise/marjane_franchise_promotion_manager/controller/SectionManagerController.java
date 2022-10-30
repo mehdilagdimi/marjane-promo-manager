@@ -16,7 +16,6 @@ public class SectionManagerController {
         Manager manager = BeanController.find((int)request.getAttribute(findFirst), Manager.class);
         request.setAttribute("center", manager.getCenter());
         //set this current sectionManager object reference in BeanLambdaSetters class in order to get its corresponding setters as lambda expressions
-        BeanLambdaSetters.setSectionManagerReference(sectionManager);
         BeanLambdaSetters.setBeanSetters(sectionManager);
         BeanController.add(sectionManager, SectionManager.class, request, params);
     }
