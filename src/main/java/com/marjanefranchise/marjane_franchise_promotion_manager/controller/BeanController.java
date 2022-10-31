@@ -2,9 +2,11 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.controller;
 
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanLambdaSetters;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanSetterFI;
+import com.marjanefranchise.marjane_franchise_promotion_manager.base.TransactionGetExecuterFI;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.getBeanSettersFI;
 import com.marjanefranchise.marjane_franchise_promotion_manager.dao.DaoExecuter;
 import jakarta.servlet.http.HttpServletRequest;
+import org.hibernate.Session;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -15,6 +17,17 @@ public class BeanController{
     private static DaoExecuter daoExecuter = new DaoExecuter<>();
 
 
+    public static<T, P> List<T> customSelectQuerySingleParam(Class<T> beanImpl, Class<P> paramImpl, String param, P value){
+        TransactionGetExecuterFI<Session, List<T>> getListExpression  = s -> s.createQuery("SELECT b FROM " + beanImpl.getSimpleName() + " b WHERE " + "b." + param + "=" + value, beanImpl).getResultList();
+        return (List<T>) daoExecuter.customSelectQuery(getListExpression);
+    }
+    @SafeVarargs
+    public static<T, P> List<T> customSelectQueryMultipleParams(Class<T> beanImpl, Class<P> paramImpl, String[] params, P... values ){
+        daoExecuter.setType(beanImpl);
+        TransactionGetExecuterFI<Session, List<T>> getListExpression  = s -> s.createQuery("SELECT b FROM " + beanImpl.getSimpleName() + " b WHERE " + "b." + params[0] + "=" + values[0] +" AND b."+ params[1] + "=" + values[1] , beanImpl).getResultList();
+
+        return (List<T>) daoExecuter.customSelectQuery(getListExpression);
+    }
     public static<T> T find(int id, Class<T> beanImpl){
         daoExecuter.setType(beanImpl);
         return (T) daoExecuter.find(id);

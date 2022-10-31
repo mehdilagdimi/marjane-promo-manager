@@ -7,10 +7,12 @@ import com.marjanefranchise.marjane_franchise_promotion_manager.util.HibernateUt
 import org.hibernate.Session;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class DaoExecuter<T> extends TransactionExecuter{
     private Class<? extends T> type;
     String typeStr;
+    String paramTypeStr;
     TransactionExecuterFI<Session> expression;
     TransactionGetExecuterFI<Session, T> getExpression;
 
@@ -27,6 +29,11 @@ public class DaoExecuter<T> extends TransactionExecuter{
 
         this.type = type;
         this.typeStr = this.type.getSimpleName();
+    }
+
+
+    public List<T> customSelectQuery(TransactionGetExecuterFI<Session, List<T>> getListExpressionParam){
+        return (List<T>) executeTransaction(getListExpressionParam);
     }
 
     public T get(int id){
@@ -60,4 +67,5 @@ public class DaoExecuter<T> extends TransactionExecuter{
         expression = (s -> s.remove(jpaBean));
         executeTransaction(expression);
     }
+
 }
