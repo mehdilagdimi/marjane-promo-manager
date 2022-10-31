@@ -19,13 +19,13 @@ public class ManagerServlet extends HttpServlet {
     private ManagerController managerController;
     @Override
     public void init() throws ServletException {
-        super.init();
         managerController = new ManagerController();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        System.out.println(" inside manager serv");
+//        doPost(request,response);
 
     }
 

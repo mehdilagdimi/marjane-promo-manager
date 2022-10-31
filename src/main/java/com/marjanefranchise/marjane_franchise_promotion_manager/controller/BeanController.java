@@ -18,13 +18,16 @@ public class BeanController{
 
 
     public static<T, P> List<T> customSelectQuerySingleParam(Class<T> beanImpl, Class<P> paramImpl, String param, P value){
-        TransactionGetExecuterFI<Session, List<T>> getListExpression  = s -> s.createQuery("SELECT b FROM " + beanImpl.getSimpleName() + " b WHERE " + "b." + param + "=" + value, beanImpl).getResultList();
+        System.out.println(" email sinide custom query " + param);
+        System.out.println(" value sinide custom query " + value);
+        System.out.println(" query : " + "SELECT b FROM " + beanImpl.getSimpleName() + " b WHERE " + "b." + param + "='" + value + "'");
+        TransactionGetExecuterFI<Session, List<T>> getListExpression  = s -> s.createQuery("SELECT b FROM " + beanImpl.getSimpleName() + " b WHERE " + "b." + param + "='" + value + "'", beanImpl).getResultList();
         return (List<T>) daoExecuter.customSelectQuery(getListExpression);
     }
     @SafeVarargs
     public static<T, P> List<T> customSelectQueryMultipleParams(Class<T> beanImpl, Class<P> paramImpl, String[] params, P... values ){
         daoExecuter.setType(beanImpl);
-        TransactionGetExecuterFI<Session, List<T>> getListExpression  = s -> s.createQuery("SELECT b FROM " + beanImpl.getSimpleName() + " b WHERE " + "b." + params[0] + "=" + values[0] +" AND b."+ params[1] + "=" + values[1] , beanImpl).getResultList();
+        TransactionGetExecuterFI<Session, List<T>> getListExpression  = s -> s.createQuery("SELECT b FROM " + beanImpl.getSimpleName() + " b WHERE " + "b." + params[0] + "='" + values[0] +"' AND b."+ params[1] + "='" + values[1] + "'", beanImpl).getResultList();
 
         return (List<T>) daoExecuter.customSelectQuery(getListExpression);
     }

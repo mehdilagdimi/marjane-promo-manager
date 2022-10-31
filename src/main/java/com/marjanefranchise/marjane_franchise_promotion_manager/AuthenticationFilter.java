@@ -8,38 +8,48 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "AuthenticationFilter", value = "/AuthenticationFilter")
+@WebFilter("/*")
 public class AuthenticationFilter implements Filter {
-    private ServletContext context;
-
-    public void init(FilterConfig fConfig) throws ServletException {
-        this.context = fConfig.getServletContext();
-        this.context.log("AuthenticationFilter initialized");
-    }
-
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-
-        String uri = req.getRequestURI();
-        this.context.log("Requested Resource::"+uri);
-
-        HttpSession session = req.getSession(false);
-
-        if(session == null && !(uri.endsWith("html") || uri.endsWith("LoginServlet"))){
-            this.context.log("Unauthorized access request");
-            res.sendRedirect("pages/loginPage.jsp");
-        }else{
-            // pass the request along the filter chain
-            chain.doFilter(request, response);
-        }
-
-
-    }
 
     public void destroy() {
-        //close any resources here
     }
 
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+        String baseUrl = "http://localhost:8080/marjane_franchise_promotion_manager_war_exploded/";
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        res.setHeader("Cache-Control","no-cache");
+        res.setHeader("Cache-Control","no-store");
+        res.setHeader("Pragma","no-cache");
+        res.setDateHeader ("Expires", 0);
+        String uri = req.getRequestURI();
+        System.out.println("uri " + uri);
+
+        System.out.println(" url " + req.getRequestURL());
+        System.out.println( " param" + req.getParameter("loginattempt"));
+        HttpSession session = req.getSession();
+        System.out.println(" user obj " + session.getAttribute("user"));
+
+        if(uri.contains("assets")) chain.doFilter(request, response);
+
+        if(session.getAttribute("user") == null){
+            if(req.getParameter("loginattempt") != null){
+                chain.doFilter(request, response);
+                return;
+            }
+            if(!uri.contains("loginPage.jsp")){
+                    System.out.println(" inside page ");
+                    res.sendRedirect(baseUrl + "pages/loginPage.jsp");
+                    return;
+            }
+        } else {
+            if(uri.contains("loginPage.jsp")){
+                res.sendRedirect(baseUrl );
+                return;
+            }
+        }
+        // pass the request along the filter chain
+        chain.doFilter(request, response);
+    }
 }
