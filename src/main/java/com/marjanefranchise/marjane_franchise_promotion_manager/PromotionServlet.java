@@ -34,29 +34,34 @@ public class PromotionServlet extends HttpServlet {
         //for testing doPost from direct browser requesting
 //        doPost(request, response);
 
-
         if(request.getParameter("get") != null){
             List<Promotion> promotionList = null;
            if(request.getParameter("get").equals("all")){
-               //check conencted user role
-               int id = (int)request.getSession().getAttribute("user_id");
+               if(request.getSession().getAttribute("role").equals("superadmin")){
+                   promotionList = promotionController.getAll();
+               } else {
+                   //check conencted user role
+                   int id = (int)request.getSession().getAttribute("user_id");
 
-               //if role is manager then
-               if(request.getSession().getAttribute("role").equals("manager")){
-                   promotionList = promotionController.getAllForManager(id);
+                   //if role is manager then
+                   if(request.getSession().getAttribute("role").equals("manager")){
+                       promotionList = promotionController.getAllForManager(id);
+                   }
+                    else if(request.getSession().getAttribute("role").equals("sectionmanager")){
+                        if(promotionController.checkAuthorizedAcessForManager()){
+                            promotionList = promotionController.getAllForSectionManager(id);
+                        } else {
+                            System.out.println(" Unauthorizd access promotions list : View of promotions only availabe btwn 8-12 ");
+                        }
+                   }
                }
-                else if(request.getSession().getAttribute("role").equals("sectionmanager")){
-                    if(promotionController.checkAuthorizedAcessForManager()){
-                        promotionList = promotionController.getAllForSectionManager(id);
-                    } else {
-                        System.out.println(" Unauthorizd access promotions list : View of promotions only availabe btwn 8-12 ");
-                    }
-               }
-                request.setAttribute("promotions", promotionList);
+               //clear attrivute records
+//                if(request.getAttribute("records")!= null){
+//                    request.removeAttribute("records");
+//                }
+                request.setAttribute("records", promotionList);
+                request.setAttribute("recordstype", "promotion");
                 request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
-
-//               response.sendRedirect(request.getRequestURI());
-//                response.sendRedirect(baseURL + "pages/dashboard.jsp");
            }
         }
     }

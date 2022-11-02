@@ -1,9 +1,25 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.controller;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
+
 import java.util.List;
 
 public class AuthController {
 
+    public static<T> boolean checkIfSuperAdmin(String email, String password) {
+        boolean isSuperAdmin = false;
+        Dotenv dotenv;
+        dotenv = Dotenv.configure().ignoreIfMissing().load();
+        System.out.println(" insde super ");
+        System.out.println(" env super " + dotenv.get("SUPERADMINEMAIL"));
+        if(dotenv.get("SUPERADMINEMAIL") != null && dotenv.get("SUPERADMINEMAIL").equals(email)){
+            System.out.println(" super email" + dotenv.get("SUPERADMINEMAIL"));
+            System.out.println(" super email" + dotenv.get("SUPERADMINPASSW"));
+            isSuperAdmin = (dotenv.get("SUPERADMINPASSW") != null && dotenv.get("SUPERADMINPASSW").equals(password)) ? true : false;
+        }
+        return isSuperAdmin;
+    }
     public static<T> boolean checkEmailExist(String email, Class<T> beanImpl){
 //        boolean isExist = false;
         List<T> beans = BeanController.customSelectQuerySingleParam(beanImpl, String.class, "email", email);
@@ -22,4 +38,5 @@ public class AuthController {
         }
         return null;
     }
+
 }

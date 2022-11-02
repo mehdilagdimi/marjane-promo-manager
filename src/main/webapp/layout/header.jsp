@@ -28,7 +28,7 @@
                     <img  class="w-20 h-20"  src="<%=application.getInitParameter("url")%>assets/logo_marjane.svg"/>
                 </div>
                 <div class="flex justify-start items-center text-center select-none font-semibold col-span-3">
-                    <h4>Manager Dashboard</h4>
+                    <h4>Super Admin Dashboard</h4>
                 </div>
                 <div class="flex justify-end items-center rounded-full px-4 mx-4">
                     <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_cz6ukw4q.json" class="cursor-pointer h-20 w-24 mr-8"

@@ -1,15 +1,17 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.controller;
 
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanLambdaSetters;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Category;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Center;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.SectionManager;
+import com.marjanefranchise.marjane_franchise_promotion_manager.entity.*;
 import jakarta.servlet.http.HttpServletRequest;
+
+import java.util.List;
 
 
 public class SectionManagerController {
 
+    public List<SectionManager> getAll(){
+        return BeanController.getAll(SectionManager.class);
+    }
     public void addSectionManager(HttpServletRequest request, String findFirst, String... params){
         SectionManager sectionManager = new SectionManager();
         //set sectionManager on center entity before adding center to sectionManager and creating it(sectionManager)
@@ -19,5 +21,6 @@ public class SectionManagerController {
         BeanLambdaSetters.setBeanSetters(sectionManager);
         BeanController.add(sectionManager, SectionManager.class, request, params);
     }
+
 
 }

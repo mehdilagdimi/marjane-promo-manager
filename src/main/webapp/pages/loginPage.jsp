@@ -26,7 +26,7 @@
         <div class="flex flex-col justify-around  col-start-2 col-end-12 row-start-2 row-end-6">
             <form action="<%=baseURL%>LoginServlet?loginattempt=true" method="post" name="loginfom" id="formId" onSubmit="toggleDisplayLoading(event)">
                 <div class="text-center font-semibold text-purple-800">
-                    <img src="../assets/logo_marjane.svg" fill="currentColor" class="mx-auto h-20 w-2/6"/>
+                    <img src="<%=baseURL%>assets/logo_marjane.svg" fill="currentColor" class="mx-auto h-20 w-2/6"/>
                 </div>
                 <div>
                     <div class="m-5 text-center rounded-sm">
@@ -61,14 +61,7 @@
 
 <script type="text/javascript">
     function toggleDisplayLoading(event) {
-        event.preventDefault();
-        // var x = document.getElementById("loading");
-        // if (x.style.display === "none") {
-        //     x.style.display = "block";
-        // } else {
-        //     x.style.display = "none";
-        // }
-        // let elem = document.getElementById("submitBtnId");
+        event.preventDefault();;
         let elem = document.getElementById("btnContainerId");
         console.log(" elem " + elem.innerHTML)
         elem.innerHTML = '';

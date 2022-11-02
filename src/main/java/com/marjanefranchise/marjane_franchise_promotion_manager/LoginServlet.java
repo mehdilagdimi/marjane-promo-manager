@@ -27,6 +27,18 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String passw = request.getParameter("password");
 
+        //check if super admin station
+        if(AuthController.checkIfSuperAdmin(email, passw)){
+            Person user = new Person();
+            user.setEmail(email);
+            user.setPassw(passw);
+            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("role", "superadmin");
+            request.getSession().setMaxInactiveInterval(30*60);
+            response.sendRedirect(baseURL + "pages/dashboard.jsp");
+            return;
+        }
+
         if(AuthController.checkEmailExist(email, Manager.class)){
             if(AuthController.checkAccountExist(email, passw, Manager.class) != null){
                 System.out.println(" manager ");
