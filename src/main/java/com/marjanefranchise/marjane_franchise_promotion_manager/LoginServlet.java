@@ -32,6 +32,8 @@ public class LoginServlet extends HttpServlet {
                 System.out.println(" manager ");
                 Manager user = AuthController.checkAccountExist(email, passw, Manager.class);
                 request.getSession().setAttribute("user", user);
+                request.getSession().setAttribute("user_id", user.getId());
+                request.getSession().setAttribute("role", "manager");
                 request.getSession().setMaxInactiveInterval(30*60);
 //                Cookie userName = new Cookie("user_", user);
 //                userName.setMaxAge(30*60);
@@ -44,6 +46,8 @@ public class LoginServlet extends HttpServlet {
                 System.out.println(" Section Manager ");
                 SectionManager user = AuthController.checkAccountExist(email, passw, SectionManager.class);
                 request.getSession().setAttribute("user", user);
+                request.getSession().setAttribute("user_id", user.getId());
+                request.getSession().setAttribute("role", "sectionManager");
                 request.getSession().setMaxInactiveInterval(30*60);
                 response.sendRedirect(baseURL + "pages/dashboard.jsp");
             }

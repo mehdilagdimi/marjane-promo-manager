@@ -21,40 +21,44 @@ import java.util.List;
 @WebServlet(name = "PromotionServlet", value = "/PromotionServlet")
 public class PromotionServlet extends HttpServlet {
     PromotionController promotionController;
+    String baseURL;
     @Override
     public void init() throws ServletException {
         super.init();
         promotionController = new PromotionController();
+        baseURL = getServletContext().getInitParameter("url");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //for testing doPost from direct browser requesting
-        doPost(request, response);
+//        doPost(request, response);
 
 
         if(request.getParameter("get") != null){
+            List<Promotion> promotionList = null;
            if(request.getParameter("get").equals("all")){
                //check conencted user role
-//               int id = request.getSession("user_id");
-               int id = 1;
+               int id = (int)request.getSession().getAttribute("user_id");
+
                //if role is manager then
-//               if(request.getSession().getAttribute("role").equals("manager")){
-                   List<Promotion> promotionList = promotionController.getAllForManager(id);
-//               }
-//                else if(request.getSession().getAttribute("role").equals("sectionmanager")){
-//                    if(promotionController.checkAuthorizedAcessForManager()){
-//                        List<Promotion> promotionList promotionController.getAllForSectionManager(id);
-//                    } else {
-//                        System.out.println(" Unauthorizd access promotions list : View of promotions only availabe btwn 8-12 ");
-//                    }
-//               }
-               System.out.println(" getting promotions ");
-               promotionList.forEach(System.out::println);
+               if(request.getSession().getAttribute("role").equals("manager")){
+                   promotionList = promotionController.getAllForManager(id);
+               }
+                else if(request.getSession().getAttribute("role").equals("sectionmanager")){
+                    if(promotionController.checkAuthorizedAcessForManager()){
+                        promotionList = promotionController.getAllForSectionManager(id);
+                    } else {
+                        System.out.println(" Unauthorizd access promotions list : View of promotions only availabe btwn 8-12 ");
+                    }
+               }
+                request.setAttribute("promotions", promotionList);
+                request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
+
+//               response.sendRedirect(request.getRequestURI());
+//                response.sendRedirect(baseURL + "pages/dashboard.jsp");
            }
         }
-        //THIS IS FOR TESTING ADDING MANAGER REQUESTING THROUW BROWSER
-//        doPost(request, response);
     }
 
     @Override

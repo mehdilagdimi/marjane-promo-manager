@@ -6,10 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<% String baseURL = application.getInitParameter("url"); %>--%>
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="<%=application.getInitParameter("url")%>styles/base.css">
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -23,7 +25,7 @@
     <nav class="w-full fixed top-0 bg-gray-50">
             <div class="max-h-28 w-full ml-12 mr-0 grid grid-flow-col grid-cols-5">
                 <div class="">
-                    <img  class="w-20 h-20"  src="../assets/logo_marjane.svg"/>
+                    <img  class="w-20 h-20"  src="<%=application.getInitParameter("url")%>assets/logo_marjane.svg"/>
                 </div>
                 <div class="flex justify-start items-center text-center select-none font-semibold col-span-3">
                     <h4>Manager Dashboard</h4>

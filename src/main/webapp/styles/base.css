@@ -10,3 +10,15 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+.card-details {
+    display : none;
+}
+
+.card:hover .card-details {
+    display : flex;
+}
+
+.dropdown:hover .dropdown-content{
+    display : block;
+}

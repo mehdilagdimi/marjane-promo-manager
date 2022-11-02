@@ -25,6 +25,7 @@ public class Promotion implements getBeanSettersFI {
     @Column(nullable = false)
     private String status = "en cours";
 
+
     @Column()
     private String comment;
     @Column(nullable = false)
@@ -97,6 +98,10 @@ public class Promotion implements getBeanSettersFI {
 
     public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
+    }
+
+    public List<Category> getSubCategoryList() {
+        return subCategoryList;
     }
 
     public Promotion addSubCategory(Category subCategory){
