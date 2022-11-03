@@ -5,6 +5,7 @@ import com.marjanefranchise.marjane_franchise_promotion_manager.controller.AuthC
 import com.marjanefranchise.marjane_franchise_promotion_manager.controller.ManagerController;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.SectionManager;
+import com.marjanefranchise.marjane_franchise_promotion_manager.entity.SuperAdmin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -29,9 +30,9 @@ public class LoginServlet extends HttpServlet {
 
         //check if super admin station
         if(AuthController.checkIfSuperAdmin(email, passw)){
-            Person user = new Person();
-            user.setEmail(email);
-            user.setPassw(passw);
+
+            SuperAdmin user = SuperAdmin.getInstance("SuperAdmin", email, passw);
+//
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("role", "superadmin");
             request.getSession().setMaxInactiveInterval(30*60);

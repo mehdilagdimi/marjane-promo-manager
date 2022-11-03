@@ -13,7 +13,7 @@ public final class SuperAdmin extends Person {
         super(fullname, email, passw);
     }
 
-    public static SuperAdmin getInstance(){
+    public static SuperAdmin getInstance(String fullname, String email, String passw){
         if(superAdmin == null) superAdmin = new SuperAdmin();
 
         return superAdmin;

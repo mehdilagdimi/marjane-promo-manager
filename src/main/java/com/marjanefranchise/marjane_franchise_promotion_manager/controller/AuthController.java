@@ -20,6 +20,7 @@ public class AuthController {
         }
         return isSuperAdmin;
     }
+
     public static<T> boolean checkEmailExist(String email, Class<T> beanImpl){
 //        boolean isExist = false;
         List<T> beans = BeanController.customSelectQuerySingleParam(beanImpl, String.class, "email", email);
