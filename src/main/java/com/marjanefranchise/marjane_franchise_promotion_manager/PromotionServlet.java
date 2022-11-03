@@ -55,13 +55,9 @@ public class PromotionServlet extends HttpServlet {
                         }
                    }
                }
-               //clear attrivute records
-//                if(request.getAttribute("records")!= null){
-//                    request.removeAttribute("records");
-//                }
-                request.setAttribute("records", promotionList);
-                request.setAttribute("recordstype", "promotion");
-                request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
+            request.setAttribute("records", promotionList);
+            request.setAttribute("recordstype", "promotion");
+            request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
            }
         }
     }

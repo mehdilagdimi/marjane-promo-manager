@@ -1,9 +1,12 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.controller;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import jakarta.servlet.http.HttpServletRequest;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AuthController {
 
@@ -39,5 +42,6 @@ public class AuthController {
         }
         return null;
     }
+
 
 }

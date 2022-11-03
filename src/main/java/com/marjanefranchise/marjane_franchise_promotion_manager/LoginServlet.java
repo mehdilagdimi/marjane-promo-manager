@@ -12,6 +12,10 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -27,6 +31,36 @@ public class LoginServlet extends HttpServlet {
         // get request parameters for userID and password
         String email = request.getParameter("email");
         String passw = request.getParameter("password");
+
+        Map<String, String> titleMap = new LinkedHashMap<>(Map.ofEntries(
+                Map.entry("superadmin", "Super Admin Dashboard"),
+                Map.entry("manager", "Manager Dashboard"),
+                Map.entry("sectionmanager", "Section Manager Dashboard")
+        ));
+
+        Map<String, String[]> superAdminSideBarContent = new LinkedHashMap<>(Map.ofEntries(
+                Map.entry("Statistics", new String[] {"#", "fa-solid fa-chart-pie"}),
+                Map.entry("Promotion", new String[] {"PromotionServlet?get=all", "fa-solid fa-percent"}),
+                Map.entry("Category", new String[] {"#", "fa-solid fa-layer-group"}),
+                Map.entry("Manager", new String[] {"ManagerServlet?get=all","fa-solid fa-people-roof"}),
+                Map.entry("Section Manager" , new String[] {"SectionManagerServlet?get=all", "fa-solid fa-people-roof"}),
+                Map.entry("Center", new String[] {"#", "fa-solid fa-shop"})
+        ));
+        Map<String, String[]> managerSideBarContent = new LinkedHashMap<>(Map.ofEntries(
+                Map.entry("Statistics", new String[] {"#", "fa-solid fa-chart-pie"}),
+                Map.entry("Promotion", new String[] {"PromotionServlet?get=all", "fa-solid fa-percent"}),
+                Map.entry("Category",new String[] {"#", "fa-solid fa-layer-group"}),
+                Map.entry("Section Manager" , new String[] {"ManagerServlet?get=all","fa-solid fa-people-roof"})
+        ));
+
+        Map<String, Map<String, String[]>> sideBarContentMap = new LinkedHashMap<>(Map.ofEntries(
+                Map.entry("superadmin", superAdminSideBarContent),
+                Map.entry("manager", managerSideBarContent)
+        ));
+
+        request.getSession().setAttribute("headerTitles", titleMap);
+        request.getSession().setAttribute("sidebarTabs", sideBarContentMap);
+
 
         //check if super admin station
         if(AuthController.checkIfSuperAdmin(email, passw)){
