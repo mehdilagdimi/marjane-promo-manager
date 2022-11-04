@@ -11,11 +11,8 @@ public class AuthController {
         boolean isSuperAdmin = false;
         Dotenv dotenv;
         dotenv = Dotenv.configure().ignoreIfMissing().load();
-        System.out.println(" insde super ");
-        System.out.println(" env super " + dotenv.get("SUPERADMINEMAIL"));
+
         if(dotenv.get("SUPERADMINEMAIL") != null && dotenv.get("SUPERADMINEMAIL").equals(email)){
-            System.out.println(" super email" + dotenv.get("SUPERADMINEMAIL"));
-            System.out.println(" super email" + dotenv.get("SUPERADMINPASSW"));
             isSuperAdmin = (dotenv.get("SUPERADMINPASSW") != null && dotenv.get("SUPERADMINPASSW").equals(password)) ? true : false;
         }
         return isSuperAdmin;
