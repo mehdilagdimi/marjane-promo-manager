@@ -10,13 +10,13 @@
 <%@ page import="com.marjanefranchise.marjane_franchise_promotion_manager.entity.Promotion" %>
 <link rel="stylesheet" href="<%=application.getInitParameter("url")%>styles/base.css">
 
-<% String role = (String)request.getSession().getAttribute("role"); %>
+<%--<% String role = (String)request.getSession().getAttribute("role"); %>--%>
 <% String activePage = (String)request.getSession().getAttribute("activePage"); %>
 
 <div class="flex flex-row h-full w-full absolute top-20">
     <%@ include file="../layout/dashboardSidebar.jsp" %>
     <div class="ml-16 sm:ml-56 mr-8 sm:mr-14 relative w-full">
-        <div class="flex justify-end m-6">
+        <div class='${recordstype.equals("manager") && role.equals("superadmin")? "flex" : "hidden"} justify-end m-6'>
             <button onclick="toggleDisplayForm()" class="bg-[#0043BD] py-3 px-12 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]">New</button>
         </div>
         <%@ include file="../layout/addManager.jsp" %>
