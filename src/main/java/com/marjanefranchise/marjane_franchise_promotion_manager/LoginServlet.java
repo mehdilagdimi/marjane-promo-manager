@@ -32,31 +32,30 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String passw = request.getParameter("password");
 
-        Map<String, String> titleMap = new LinkedHashMap<>(Map.ofEntries(
-                Map.entry("superadmin", "Super Admin Dashboard"),
-                Map.entry("manager", "Manager Dashboard"),
-                Map.entry("sectionmanager", "Section Manager Dashboard")
-        ));
+        Map<String, String> titleMap = new LinkedHashMap<>();
+            titleMap.put("superadmin", "Super Admin Dashboard");
+            titleMap.put("manager", "Manager Dashboard");
+            titleMap.put("sectionmanager", "Section Manager Dashboard");
 
-        Map<String, String[]> superAdminSideBarContent = new LinkedHashMap<>(Map.ofEntries(
-                Map.entry("Statistics", new String[] {"#", "fa-solid fa-chart-pie"}),
-                Map.entry("Promotion", new String[] {"PromotionServlet?get=all", "fa-solid fa-percent"}),
-                Map.entry("Category", new String[] {"#", "fa-solid fa-layer-group"}),
-                Map.entry("Manager", new String[] {"ManagerServlet?get=all","fa-solid fa-people-roof"}),
-                Map.entry("Section Manager" , new String[] {"SectionManagerServlet?get=all", "fa-solid fa-people-roof"}),
-                Map.entry("Center", new String[] {"#", "fa-solid fa-shop"})
-        ));
-        Map<String, String[]> managerSideBarContent = new LinkedHashMap<>(Map.ofEntries(
-                Map.entry("Statistics", new String[] {"#", "fa-solid fa-chart-pie"}),
-                Map.entry("Promotion", new String[] {"PromotionServlet?get=all", "fa-solid fa-percent"}),
-                Map.entry("Category",new String[] {"#", "fa-solid fa-layer-group"}),
-                Map.entry("Section Manager" , new String[] {"ManagerServlet?get=all","fa-solid fa-people-roof"})
-        ));
+        Map<String, String[]> superAdminSideBarContent = new LinkedHashMap<>();
+            superAdminSideBarContent.put("Statistics", new String[] {"#", "fa-solid fa-chart-pie"});
+            superAdminSideBarContent.put("Promotion", new String[] {"PromotionServlet?get=all", "fa-solid fa-percent"});
+            superAdminSideBarContent.put("SectionManager" , new String[] {"SectionManagerServlet?get=all", "fa-solid fa-people-roof"});
+            superAdminSideBarContent.put("Category", new String[] {"#", "fa-solid fa-layer-group"});
+            superAdminSideBarContent.put("Manager", new String[] {"ManagerServlet?get=all","fa-solid fa-people-roof"});
+            superAdminSideBarContent.put("Center", new String[] {"#", "fa-solid fa-shop"});
+
+        Map<String, String[]> managerSideBarContent = new LinkedHashMap<>();
+            managerSideBarContent.put("Statistics", new String[] {"#", "fa-solid fa-chart-pie"});
+            managerSideBarContent.put("Promotion", new String[] {"PromotionServlet?get=all", "fa-solid fa-percent"});
+            managerSideBarContent.put("Category",new String[] {"#", "fa-solid fa-layer-group"});
+            managerSideBarContent.put("SectionManager" , new String[] {"SectionManagerServlet?get=all","fa-solid fa-people-roof"});
 
         Map<String, Map<String, String[]>> sideBarContentMap = new LinkedHashMap<>(Map.ofEntries(
                 Map.entry("superadmin", superAdminSideBarContent),
                 Map.entry("manager", managerSideBarContent)
         ));
+
 
         request.getSession().setAttribute("headerTitles", titleMap);
         request.getSession().setAttribute("sidebarTabs", sideBarContentMap);

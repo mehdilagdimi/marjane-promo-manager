@@ -20,10 +20,10 @@
             <button onclick="toggleDisplayForm()" class="bg-[#0043BD] py-3 px-12 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]">New</button>
         </div>
         <%@ include file="../layout/addManager.jsp" %>
-        <div class="m-4 overflow-x-auto no-scroll absolute left-4 right-0" id="recordsDivId">
-            <div class="bg-white flex flex-col p-4 min-w-[1400px]">
                     <c:choose>
                         <c:when test="${records != null}">
+        <div class="z-50 m-4 overflow-x-auto no-scroll absolute left-4 right-0" id="recordsDivId">
+            <div class="bg-white flex flex-col p-4 min-w-[1400px]">
                             <c:if test='${recordstype.equals("promotion")}'>
                                 <div class="bg-gray-50 p-4 grid grid-cols-5 text-center text-md font-semibold mx-3 my-2 shadow-sm rounded-sm ">
                                     <div class="block">ID</div>
@@ -134,10 +134,10 @@
                                 </c:forEach>
                             </c:if>
 
+                </div>
+            </div>
                         </c:when>
                     </c:choose>
-            </div>
-        </div>
     </div>
 </div>
 

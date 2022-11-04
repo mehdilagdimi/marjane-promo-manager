@@ -18,8 +18,8 @@
 </head>
 <body>
 <div class="w-full relative flex min-h-screen flex-row justify-center overflow-hidden bg-gray-50 py-6 px-4 sm:py-12">
-    <div class="w-full bg-grey-50 hidden sm:flex flex justify-content-center align-items-center">
-        <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_7iJBrlAASd.json" class="text-center"
+    <div class="w-full hidden sm:w-[250px] md:w-[400px] lg:w-[1200px] bg-grey-50 hidden sm:flex flex justify-content-center align-items-center">
+        <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_y2v4toul.json" class="text-center "
                        background="transparent" speed="1" loop autoplay></lottie-player>
     </div>
     <div class="w-full bg-white grid grid-cols-12 grid-rows-6 p-4">

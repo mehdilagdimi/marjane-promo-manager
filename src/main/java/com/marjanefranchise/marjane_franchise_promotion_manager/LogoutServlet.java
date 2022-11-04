@@ -9,7 +9,7 @@ import java.io.IOException;
 @WebServlet(name = "LogoutServlet", value = "/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
 
-        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //            response.setContentType("text/html");
 //            Cookie[] cookies = request.getCookies();
 //            if(cookies != null){
@@ -20,12 +20,13 @@ public class LogoutServlet extends HttpServlet {
 //                    }
 //                }
 //            }
+            String baseUrl = "http://localhost:8080/marjane_franchise_promotion_manager_war_exploded/";
             //invalidate the session if exists
             HttpSession session = request.getSession(false);
             System.out.println("User="+session.getAttribute("user"));
             if(session != null){
                 session.invalidate();
             }
-            response.sendRedirect("login.html");
+            response.sendRedirect( baseUrl + "pages/loginPage.jsp");
         }
 }

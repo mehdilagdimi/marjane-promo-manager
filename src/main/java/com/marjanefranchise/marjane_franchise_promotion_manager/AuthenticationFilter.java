@@ -19,6 +19,9 @@ public class AuthenticationFilter implements Filter {
         String baseUrl = "http://localhost:8080/marjane_franchise_promotion_manager_war_exploded/";
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+
+        //set servlet path into request
+
         res.setHeader("Cache-Control","no-cache");
         res.setHeader("Cache-Control","no-store");
         res.setHeader("Pragma","no-cache");
@@ -29,7 +32,9 @@ public class AuthenticationFilter implements Filter {
         System.out.println(" url " + req.getRequestURL());
         System.out.println( " param" + req.getParameter("loginattempt"));
         HttpSession session = req.getSession();
+        System.out.println(" url " + req.getServletPath());
         System.out.println(" user obj " + session.getAttribute("user"));
+        session.setAttribute("servletpath", req.getServletPath().toUpperCase());
 
         if(uri.contains("assets")) chain.doFilter(request, response);
 
