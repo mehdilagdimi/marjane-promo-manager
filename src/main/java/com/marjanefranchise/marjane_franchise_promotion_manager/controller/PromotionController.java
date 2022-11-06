@@ -26,16 +26,19 @@ public class PromotionController<T> {
                .filter(promotion -> promotion.getCenter() == manager.getCenter())
                .collect(Collectors.toList());
     }
-    public List<Promotion> getAllForSectionManager(int id){
-           SectionManager sectionManager = BeanController.find(id, SectionManager.class);
-
-           List<Promotion> promotionList = BeanController.getAll(Promotion.class);
-           return promotionList.stream()
-                   .filter(promotion -> promotion.getCenter() == sectionManager.getCenter())
+    public List<Promotion> getAllForSectionManager(HttpServletRequest request){
+            SectionManager sectionManager = (SectionManager) request.getSession().getAttribute("user");
+           List<Promotion> promotionListForCenter = BeanController.customSelectQuerySingleParam(Promotion.class, Integer.class, "center", sectionManager.getCenter().getId());
+          return promotionListForCenter.stream()
+                   .filter(promotion -> promotion.getSubCategoryList().stream().anyMatch(category -> category.getParent() ==  sectionManager.getCategory()))
                    .collect(Collectors.toList());
     }
+//    public List<SectionManager> getAllBySectionManager(HttpServletRequest request){
+//        int id = ((SectionManager)request.getSession().getAttribute("user")).getId();
+//        return BeanController.customSelectQuerySingleParam(SectionManager.class, Integer.class, "center", center_id);
+//    }
 
-    public boolean checkAuthorizedAcessForManager(){
+    public boolean checkAuthorizedAccessForManager(){
         LocalTime start = LocalTime.parse("08:00");
         LocalTime end = LocalTime.parse("12:00");
         LocalTime now = LocalTime.now();

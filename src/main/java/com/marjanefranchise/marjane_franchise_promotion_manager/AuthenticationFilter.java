@@ -27,13 +27,11 @@ public class AuthenticationFilter implements Filter {
         res.setHeader("Pragma","no-cache");
         res.setDateHeader ("Expires", 0);
         String uri = req.getRequestURI();
-        System.out.println("uri " + uri);
+//        System.out.println("uri " + uri);
 
         System.out.println(" url " + req.getRequestURL());
-        System.out.println( " param" + req.getParameter("loginattempt"));
         HttpSession session = req.getSession();
-        System.out.println(" url " + req.getServletPath());
-        System.out.println(" user obj " + session.getAttribute("user"));
+//        System.out.println(" url " + req.getServletPath());
         session.setAttribute("servletpath", req.getServletPath().toUpperCase());
 
         if(uri.contains("assets")) chain.doFilter(request, response);

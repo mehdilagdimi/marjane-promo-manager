@@ -51,9 +51,14 @@ public class LoginServlet extends HttpServlet {
             managerSideBarContent.put("Category",new String[] {"#", "fa-solid fa-layer-group"});
             managerSideBarContent.put("SectionManager" , new String[] {"SectionManagerServlet?get=all","fa-solid fa-people-roof"});
 
+        Map<String, String[]> sectionManagerSideBarContent = new LinkedHashMap<>();
+            sectionManagerSideBarContent.put("Statistics", new String[] {"#", "fa-solid fa-chart-pie"});
+            sectionManagerSideBarContent.put("Promotion", new String[] {"PromotionServlet?get=all", "fa-solid fa-percent"});
+
         Map<String, Map<String, String[]>> sideBarContentMap = new LinkedHashMap<>(Map.ofEntries(
                 Map.entry("superadmin", superAdminSideBarContent),
-                Map.entry("manager", managerSideBarContent)
+                Map.entry("manager", managerSideBarContent),
+                Map.entry("sectionmanager", sectionManagerSideBarContent)
         ));
 
 
@@ -93,7 +98,7 @@ public class LoginServlet extends HttpServlet {
                 SectionManager user = AuthController.checkAccountExist(email, passw, SectionManager.class);
                 request.getSession().setAttribute("user", user);
                 request.getSession().setAttribute("user_id", user.getId());
-                request.getSession().setAttribute("role", "sectionManager");
+                request.getSession().setAttribute("role", "sectionmanager");
                 request.getSession().setMaxInactiveInterval(30*60);
                 response.sendRedirect(baseURL + "pages/dashboard.jsp");
             }

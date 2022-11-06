@@ -32,8 +32,10 @@ public class SectionManagerServlet extends HttpServlet {
                 if (request.getParameter("get").equals("all")) {
                     sectionManagerList = sectionManagerController.getAll();
                 }
-            } else if (request.getSession().getAttribute("role") == "manager") {
-                //            sectionManagerController.getById();
+                } else if (request.getSession().getAttribute("role") == "manager") {
+                    if (request.getParameter("get").equals("all")) {
+                        sectionManagerList = sectionManagerController.getAllByMarket(request);
+                }
             }
             request.setAttribute("records", sectionManagerList);
             request.setAttribute("recordstype", "sectionmanager");

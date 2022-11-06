@@ -36,7 +36,7 @@ public class PromotionServlet extends HttpServlet {
 
         if(request.getParameter("get") != null){
             List<Promotion> promotionList = null;
-           if(request.getParameter("get").equals("all")){
+            if(request.getParameter("get").equals("all")){
                if(request.getSession().getAttribute("role").equals("superadmin")){
                    promotionList = promotionController.getAll();
                } else {
@@ -48,16 +48,16 @@ public class PromotionServlet extends HttpServlet {
                        promotionList = promotionController.getAllForManager(id);
                    }
                     else if(request.getSession().getAttribute("role").equals("sectionmanager")){
-                        if(promotionController.checkAuthorizedAcessForManager()){
-                            promotionList = promotionController.getAllForSectionManager(id);
-                        } else {
-                            System.out.println(" Unauthorizd access promotions list : View of promotions only availabe btwn 8-12 ");
-                        }
+//                        if(promotionController.checkAuthorizedAccessForManager()){
+                            promotionList = promotionController.getAllForSectionManager(request);
+//                        } else {
+//                            System.out.println(" Unauthorizd access promotions list : View of promotions only availabe btwn 8-12 ");
+//                        }
                    }
                }
-            request.setAttribute("records", promotionList);
-            request.setAttribute("recordstype", "promotion");
-            request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
+                request.setAttribute("records", promotionList);
+                request.setAttribute("recordstype", "promotion");
+                request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
            }
         }
     }

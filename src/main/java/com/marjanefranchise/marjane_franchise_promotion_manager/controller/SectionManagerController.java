@@ -12,6 +12,10 @@ public class SectionManagerController {
     public List<SectionManager> getAll(){
         return BeanController.getAll(SectionManager.class);
     }
+    public List<SectionManager> getAllByMarket(HttpServletRequest request){
+        int center_id = ((Manager)request.getSession().getAttribute("user")).getCenter().getId();
+        return BeanController.customSelectQuerySingleParam(SectionManager.class, Integer.class, "center", center_id);
+    }
     public void addSectionManager(HttpServletRequest request, String findFirst, String... params){
         SectionManager sectionManager = new SectionManager();
         //set sectionManager on center entity before adding center to sectionManager and creating it(sectionManager)

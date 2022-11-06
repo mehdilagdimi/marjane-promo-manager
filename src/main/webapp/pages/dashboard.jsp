@@ -111,7 +111,6 @@
                                     <div class="block">ID</div>
                                     <div class="block">Name</div>
                                     <div class="block">Email</div>
-                                    <div class="block">Category</div>
                                     <div class="block">Market</div>
                                 </div>
                                 <c:forEach var="manager" items="${records}">
