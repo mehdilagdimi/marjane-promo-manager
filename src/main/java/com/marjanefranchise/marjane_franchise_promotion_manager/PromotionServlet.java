@@ -78,7 +78,7 @@ public class PromotionServlet extends HttpServlet {
             if(Arrays.stream(params).anyMatch(param -> param.equals("promotion"))){
                 //CHECK IF ROLE IS MANAGER BEFORE CONTINUE
                 System.out.println(" ADDING PROMOTION ");
-                promotionController.addPromotion(request,  "percentage", "validUntil", "listSubCategory", "center");
+                promotionController.addPromotion(request,  "percentage", "validUntil", "subcategories", "center");
             }
             if (Arrays.stream(params).anyMatch(param -> param.equals("status"))){
                 if(request.getParameter("promotion")!= null){
@@ -96,7 +96,7 @@ public class PromotionServlet extends HttpServlet {
                     promotionController.addPromotionComment(request);
                 }
             }
-
+            request.getRequestDispatcher("pages/dashboard.jsp").forward(request, response);
         }
     }
 }

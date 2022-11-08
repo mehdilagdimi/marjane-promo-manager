@@ -30,7 +30,7 @@
           <label class="w-full block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-validUntil">
            Valid Until
           </label>
-          <input name="validUntil" class="appearance-none block w-full bg-gray-50 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-validUntil" min="<%=minDate%>" type="datetime-local"  placeholder="Valid Until" required>
+          <input name="validUntil" class="appearance-none block w-full bg-gray-50 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-validUntil" min="<%=minDate%>" type="datetime-local"  step="any" placeholder="Valid Until" required>
           <p class="text-red-500 text-xs italic">Please fill out this field.</p>
         </div>
       </div>

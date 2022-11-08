@@ -49,13 +49,14 @@ public class PromotionController<T> {
     public void addPromotion(HttpServletRequest request, String... params){
         Promotion promotion = new Promotion();
         Manager manager =  (Manager)request.getSession().getAttribute("user");
-        List<Category> listSubCategory = new ArrayList<>();
 
+        List<Category> listSubCategory = new ArrayList<>();
         for(String subCategoryId : request.getParameterValues("selectSubCategories")){
-            listSubCategory.add((Category)BeanController.find(Integer.valueOf(subCategoryId), Category.class));
+            System.out.printf(" cat id " + subCategoryId);
+            listSubCategory.add(BeanController.find(Integer.valueOf(subCategoryId), Category.class));
         }
 
-        request.setAttribute("listSubCategory", listSubCategory);
+        request.setAttribute("subcategories", listSubCategory);
         request.setAttribute("percentage", Float.valueOf(request.getParameter("percentage")));
         request.setAttribute("validUntil", TimeUtil.stringToTimestamp(request.getParameter("validUntil")));
         request.setAttribute("center", manager.getCenter());

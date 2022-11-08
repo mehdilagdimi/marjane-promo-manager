@@ -68,12 +68,16 @@
                                                             </p>
                                                     </div>
                                                     <div class="col-span-1 w-full">
-                                                        <div class="dropdown relative inline-block">
-                                                            <button class="bg-gray-150 border border-gray-500 shadow-sm rounded-sm">Sub-Categories</button>
-                                                            <div class="dropdown-content hidden absolute">
+                                                        <div class="dropdown inline-block">
+                                                            <button class="bg-gray-150 border border-gray-200 shadow-sm w-[200px] p-2 rounded-md">Sub-Categories</button>
+                                                            <div class="dropdown-content hidden">
+                                                                <ul class="list-none block bg-white border rounded-md w-[200px] max-h-fit overflow-y-scroll">
                                                                 <c:forEach var="category" items="${promotion.getSubCategoryList()}">
-                                                                    <a href="#" class="block no-underline bg-white border border-gray-50">${category.getName()}</a>
+                                                                    <li class="border text-center hover:bg-gray-50">
+                                                                        <a href="#" class="block no-underline bg-white">${category.getName()}</a>
+                                                                    </li>
                                                                 </c:forEach>
+                                                                </ul>
                                                             </div>
                                                         </div>
                                                     </div>
