@@ -2,6 +2,7 @@ package com.marjanefranchise.marjane_franchise_promotion_manager;
 
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanLambdaSetters;
 import com.marjanefranchise.marjane_franchise_promotion_manager.controller.BeanController;
+import com.marjanefranchise.marjane_franchise_promotion_manager.controller.CategoryController;
 import com.marjanefranchise.marjane_franchise_promotion_manager.controller.ManagerController;
 import com.marjanefranchise.marjane_franchise_promotion_manager.controller.PromotionController;
 import com.marjanefranchise.marjane_franchise_promotion_manager.dao.DaoExecuter;
@@ -36,6 +37,7 @@ public class PromotionServlet extends HttpServlet {
 
         if(request.getParameter("get") != null){
             List<Promotion> promotionList = null;
+            List<Category> categoryList = null;
             if(request.getParameter("get").equals("all")){
                if(request.getSession().getAttribute("role").equals("superadmin")){
                    promotionList = promotionController.getAll();
@@ -46,6 +48,7 @@ public class PromotionServlet extends HttpServlet {
                    //if role is manager then
                    if(request.getSession().getAttribute("role").equals("manager")){
                        promotionList = promotionController.getAllForManager(id);
+                       categoryList = new CategoryController().getAllSubCategory();
                    }
                     else if(request.getSession().getAttribute("role").equals("sectionmanager")){
 //                        if(promotionController.checkAuthorizedAccessForManager()){
@@ -55,8 +58,13 @@ public class PromotionServlet extends HttpServlet {
 //                        }
                    }
                }
+                System.out.println(" test test db db");
                 request.setAttribute("records", promotionList);
                 request.setAttribute("recordstype", "promotion");
+                request.setAttribute("subcategoriesoptions", categoryList);
+                for (Category category : categoryList) {
+                    System.out.println(" categor " + category.getName());
+                }
                 request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
            }
         }
@@ -65,22 +73,12 @@ public class PromotionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameter("post")!= null){
+            //get params passed in url; this was made to make posting promotion, comment, status in same request if wanted
            String[] params = request.getParameter("post").split(",");
             if(Arrays.stream(params).anyMatch(param -> param.equals("promotion"))){
-                Category category = BeanController.find(2, Category.class);
-                List<Category> listSubCategory = new ArrayList<>(Arrays.asList(
-                        category
-                ));
-
-                request.setAttribute("manager_id", 1);
-        //        request.setAttribute("manager_id", request.getSession().getAttribute("user_id"));
-                request.setAttribute("percentage", 20f);
-                request.setAttribute("validUntil", Timestamp.from(Instant.now()));
-                request.setAttribute("listSubCategory", listSubCategory);
-        //        request.setAttribute("center", null);
-                System.out.println(" ADDING PROMOTION ");
                 //CHECK IF ROLE IS MANAGER BEFORE CONTINUE
-                promotionController.addPromotion(request, "manager_id", "percentage", "validUntil", "listSubCategory", "center");
+                System.out.println(" ADDING PROMOTION ");
+                promotionController.addPromotion(request,  "percentage", "validUntil", "listSubCategory", "center");
             }
             if (Arrays.stream(params).anyMatch(param -> param.equals("status"))){
                 if(request.getParameter("promotion")!= null){

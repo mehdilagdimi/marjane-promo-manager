@@ -1,13 +1,15 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.controller;
 
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanLambdaSetters;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Center;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Promotion;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.SectionManager;
+import com.marjanefranchise.marjane_franchise_promotion_manager.entity.*;
+import com.marjanefranchise.marjane_franchise_promotion_manager.util.TimeHelper.TimeUtil;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,15 +46,21 @@ public class PromotionController<T> {
         LocalTime now = LocalTime.now();
         return (now.isAfter(start) && now.isBefore(end));
     }
-    public void addPromotion(HttpServletRequest request, String findFirst, String... params){
+    public void addPromotion(HttpServletRequest request, String... params){
         Promotion promotion = new Promotion();
-        //set manager on center entity before adding center to manager and creating it(manager)
-        Manager manager = BeanController.find((int)request.getAttribute(findFirst), Manager.class);
-        Center center = manager.getCenter();
-        request.setAttribute("center", center);
+        Manager manager =  (Manager)request.getSession().getAttribute("user");
+        List<Category> listSubCategory = new ArrayList<>();
+
+        for(String subCategoryId : request.getParameterValues("selectSubCategories")){
+            listSubCategory.add((Category)BeanController.find(Integer.valueOf(subCategoryId), Category.class));
+        }
+
+        request.setAttribute("listSubCategory", listSubCategory);
+        request.setAttribute("percentage", Float.valueOf(request.getParameter("percentage")));
+        request.setAttribute("validUntil", TimeUtil.stringToTimestamp(request.getParameter("validUntil")));
+        request.setAttribute("center", manager.getCenter());
 
         //set this current manager object reference in BeanLambdaSetters class in order to get its corresponding setters as lambda expressions
-        BeanLambdaSetters.setBeanSetters(promotion);
         BeanController.add(promotion, Promotion.class, request, params);
     }
     public void updatePromotionStatus(HttpServletRequest request){

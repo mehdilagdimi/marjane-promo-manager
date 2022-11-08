@@ -11,7 +11,8 @@
 <% boolean isLoading = false; %>
 <html>
 <head>
-    <title>LoginPage</title>
+    <title>Marjane Promo Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/base.css">
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>

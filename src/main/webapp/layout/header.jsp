@@ -10,10 +10,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Marjane BackOffice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<%=application.getInitParameter("url")%>styles/base.css">
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/custom-forms@0.2.1/dist/custom-forms.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -23,7 +25,7 @@
     Map<String, String> headerTitles =((Map)request.getSession().getAttribute("headerTitles"));
 %>
 <%--</div>--%>
-<div class="w-full relative flex min-h-screen flex-col justify-center overflow-hidden">
+<div class="w-full relative flex min-h-screen flex-col justify-center">
     <nav class="w-full fixed top-0 bg-gray-50 z-[999]">
             <div class="max-h-28 w-full ml-12 mr-0 grid grid-flow-col sm:grid-cols-5">
                 <div class="">
