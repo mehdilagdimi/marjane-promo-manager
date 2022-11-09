@@ -11,7 +11,10 @@
 <link rel="stylesheet" href="<%=application.getInitParameter("url")%>styles/base.css">
 
 <%--<% String role = (String)request.getSession().getAttribute("role"); %>--%>
-<% String activePage = (String)request.getSession().getAttribute("activePage"); %>
+<%
+    String activePage = (String)request.getSession().getAttribute("activePage");
+    Promotion selectedPromotion = null;
+%>
 
 <div class="flex flex-row h-full w-full absolute top-20">
     <%@ include file="../layout/dashboardSidebar.jsp" %>
@@ -22,17 +25,20 @@
         <%@ include file="../layout/addManager.jsp" %>
 
         <c:if test='${role.equals("manager") && recordstype.equals("promotion")}' >
-            <%@ include file="../layout/addPromotion.jsp" %>
+            <div class="relative w-full flex flex-wrap bg-red-100 w-full bottom-0 top-[550px] z-50">
+                <%@ include file="../layout/promotionDetails.jsp" %>
+                <%@ include file="../layout/addPromotion.jsp" %>
+            </div>
             <div class="flex justify-end m-6">
-                <button onclick="toggleDisplayAddPromotionForm()" class="bg-[#0043BD] py-3 px-12 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]">New</button>
+                <a href="#addPromotionForm"><button onclick="toggleDisplayAddPromotionForm()" class="bg-[#0043BD] py-3 px-12 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]">New</button></a>
             </div>
         </c:if>
         <c:choose>
             <c:when test="${records != null}">
-                <div class="z-50 m-4 overflow-x-auto no-scroll absolute left-4 right-0" id="recordsDivId">
-                    <div class="bg-white flex flex-col p-4 min-w-[1400px] h-[300px]">
+                <div class="z-50 m-4 overflow-x-auto no-scroll absolute left-4 right-0 editPromotionForm" id="recordsDivId">
+                    <div class="overflow-y-auto bg-white flex flex-col min-w-[1400px] h-[400px]">
                                     <c:if test='${recordstype.equals("promotion")}'>
-                                        <div class="bg-gray-50 p-4 grid grid-cols-5 text-center text-md font-semibold mx-3 my-2 shadow-sm rounded-sm ">
+                                        <div class="sticky top-0 bg-gray-200  p-6 grid grid-cols-5 text-center text-md font-semibold mx-3 my-2 shadow-sm rounded-sm ">
                                             <div class="block">ID</div>
                                             <div class="block">Status</div>
                                             <div class="block">Valid Until</div>
@@ -40,49 +46,53 @@
                                             <div class="block">Market</div>
                                         </div>
                                         <c:forEach var="promotion" items="${records}">
-                                            <div class="card cursor-pointer bg-blue-50 flex flex-col p-0 mx-3 my-1 shadow-sm rounded-sm ">
-                                                <div class="w-full bg-gray-50 p-4 grid grid-cols-5 text-center text-md font-light">
-                                                    <div class="block">
-                                                            ${promotion.getId()}
+                                            <a href="#editPromotionForm" onclick="window.location.replace('<%=baseURL%>PromotionServlet?selected=${promotion.getId()}', '_self')">
+                                                <div class="card cursor-pointer bg-blue-50 flex flex-col p-0 mx-3 my-1 shadow-sm rounded-sm">
+                                                    <div class="w-full bg-gray-50 p-4 grid grid-cols-5 text-center text-md font-light">
+                                                        <div class="block">
+                                                                ${promotion.getId()}
+                                                        </div>
+                                                        <div class="block">
+                                                                ${promotion.getStatus()}
+                                                        </div>
+                                                        <div class="block">
+                                                                ${promotion.getValidUntil()}
+                                                        </div>
+                                                        <div class="block">
+                                                                ${promotion.getPercentage()}
+                                                        </div>
+                                                        <div class="block">
+                                                                ${promotion.getCenter().getCity()} ${promotion.getCenter().getId()}
+
+                                                        </div>
                                                     </div>
-                                                    <div class="block">
-                                                            ${promotion.getStatus()}
-                                                    </div>
-                                                    <div class="block">
-                                                            ${promotion.getValidUntil()}
-                                                    </div>
-                                                    <div class="block">
-                                                            ${promotion.getPercentage()}
-                                                    </div>
-                                                    <div class="block">
-                                                            ${promotion.getCenter().getCity()}
-                                                    </div>
-                                                </div>
-                                                <div class="card-details w-full px-4 py-8 hidden grid grid-cols-2 border-l-8 border-white text-center text-md font-light">
-                                                    <div class="col-span-1 w-full">
-                                                            <header class="text-sm">
-                                                                SECTION MANAGER COMMENT :
-                                                            </header>
-                                                            <p class="font-semibold">
-                                                                ${promotion.getComment()}
-                                                            </p>
-                                                    </div>
-                                                    <div class="col-span-1 w-full">
-                                                        <div class="dropdown inline-block">
-                                                            <button class="bg-gray-150 border border-gray-200 shadow-sm w-[200px] p-2 rounded-md">Sub-Categories</button>
-                                                            <div class="dropdown-content hidden">
-                                                                <ul class="list-none block bg-white border rounded-md w-[200px] max-h-fit overflow-y-scroll">
-                                                                <c:forEach var="category" items="${promotion.getSubCategoryList()}">
-                                                                    <li class="border text-center hover:bg-gray-50">
-                                                                        <a href="#" class="block no-underline bg-white">${category.getName()}</a>
-                                                                    </li>
-                                                                </c:forEach>
-                                                                </ul>
+                                                    <div class="card-details w-full px-4 py-8 hidden grid grid-cols-2 border-l-8 border-white text-center text-md font-light">
+                                                        <div class="col-span-1 w-full">
+                                                                <header class="text-sm bg-gray-150 border border-gray-200 shadow-sm w-[200px] p-2 rounded-md">
+                                                                    SECTION MANAGER COMMENT :
+                                                                </header>
+                                                                <p class="font-semibold">
+                                                                    ${promotion.getComment()}
+                                                                </p>
+                                                        </div>
+                                                        <div class="col-span-1 w-full">
+                                                            <div class="dropdown inline-block">
+                                                                <button class="bg-gray-150 border border-gray-200 shadow-sm w-[200px] p-2 rounded-md">Sub-Categories</button>
+                                                                <div class="dropdown-content hidden">
+                                                                    <ul class="list-none block bg-white border rounded-md w-[200px] max-h-fit overflow-y-scroll">
+                                                                    <c:forEach var="category" items="${promotion.getSubCategoryList()}">
+                                                                        <li class="border text-center hover:bg-gray-50">
+                                                                            <a href="#" class="block no-underline bg-white">${category.getName()}</a>
+                                                                        </li>
+                                                                    </c:forEach>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+
+                                            </a>
                                         </c:forEach>
                                     </c:if>
 
@@ -171,6 +181,14 @@
             addForm.style.display = "none";
         } else {
             addForm.style.display = "block";
+        }
+    }
+    function toggleDisplayEditPromotionForm() {
+        let editForm = document.getElementById("editPromotionForm");
+        if (editForm.style.display === "block") {
+            editForm.style.display = "none";
+        } else {
+            editForm.style.display = "block";
         }
     }
 </script>

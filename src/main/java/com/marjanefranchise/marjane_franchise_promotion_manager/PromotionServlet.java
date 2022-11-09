@@ -18,6 +18,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "PromotionServlet", value = "/PromotionServlet")
 public class PromotionServlet extends HttpServlet {
@@ -59,14 +60,22 @@ public class PromotionServlet extends HttpServlet {
                    }
                }
                 System.out.println(" test test db db");
-                request.setAttribute("records", promotionList);
-                request.setAttribute("recordstype", "promotion");
-                request.setAttribute("subcategoriesoptions", categoryList);
+                request.getSession().setAttribute("records", promotionList);
+                request.getSession().setAttribute("recordstype", "promotion");
+                request.getSession().setAttribute("subcategoriesoptions", categoryList);
                 for (Category category : categoryList) {
                     System.out.println(" categor " + category.getName());
                 }
                 request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
            }
+
+        } else if(request.getParameter("selected") != null){
+            int selectedPromoId = Integer.valueOf(request.getParameter("selected"));
+            List<Promotion> promotionList = ((List<Promotion>)request.getSession().getAttribute("records"));
+            Promotion selectedPromotion = promotionList.stream().filter(promotion -> promotion.getId() == selectedPromoId).collect(Collectors.toList()).get(0);
+
+            request.getSession().setAttribute("selectedPromotion", selectedPromotion);
+            request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
         }
     }
 
@@ -96,7 +105,7 @@ public class PromotionServlet extends HttpServlet {
                     promotionController.addPromotionComment(request);
                 }
             }
-            request.getRequestDispatcher("pages/dashboard.jsp").forward(request, response);
+            response.sendRedirect( baseURL + "pages/dashboard.jsp");
         }
     }
 }
