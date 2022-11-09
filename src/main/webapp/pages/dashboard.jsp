@@ -19,23 +19,23 @@
 <div class="flex flex-row h-full w-full absolute top-20">
     <%@ include file="../layout/dashboardSidebar.jsp" %>
     <div class="ml-16 sm:ml-56 mr-8 sm:mr-14 relative w-full">
-        <div class='${recordstype.equals("manager") && role.equals("superadmin")? "flex" : "hidden"} justify-end m-6'>
+        <div class='${recordstype.equals("manager") && role.equals("superadmin")? "flex" : "hidden"} justify-end mx-6 my-2'>
             <button onclick="toggleDisplayForm()" class="bg-[#0043BD] py-3 px-12 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]">New</button>
         </div>
         <%@ include file="../layout/addManager.jsp" %>
 
-        <c:if test='${role.equals("manager") && recordstype.equals("promotion")}' >
-            <div class="relative w-full flex flex-wrap bg-red-100 w-full bottom-0 top-[550px] z-50">
+        <c:if test='${role.equals("manager") && recordstype.equals("promotion")}'>
+            <div class="relative w-full flex flex-wrap w-full bottom-0 top-[500px] z-50">
                 <%@ include file="../layout/promotionDetails.jsp" %>
                 <%@ include file="../layout/addPromotion.jsp" %>
             </div>
-            <div class="flex justify-end m-6">
+            <div class="flex justify-end mx-6 my-2">
                 <a href="#addPromotionForm"><button onclick="toggleDisplayAddPromotionForm()" class="bg-[#0043BD] py-3 px-12 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]">New</button></a>
             </div>
         </c:if>
         <c:choose>
             <c:when test="${records != null}">
-                <div class="z-50 m-4 overflow-x-auto no-scroll absolute left-4 right-0 editPromotionForm" id="recordsDivId">
+                <div class="z-50 mx-4 my-2 overflow-x-auto no-scroll absolute left-4 right-0 editPromotionForm" id="recordsDivId">
                     <div class="overflow-y-auto bg-white flex flex-col min-w-[1400px] h-[400px]">
                                     <c:if test='${recordstype.equals("promotion")}'>
                                         <div class="sticky top-0 bg-gray-200  p-6 grid grid-cols-5 text-center text-md font-semibold mx-3 my-2 shadow-sm rounded-sm ">

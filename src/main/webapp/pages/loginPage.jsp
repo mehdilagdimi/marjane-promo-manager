@@ -34,14 +34,14 @@
                         <!-- <div class="col-span-2 bg-red-200 "></div> -->
                         <div class="border-l-4 border-[#FFFF00] rounded-sm">
                             <input class="w-full bg-gray-50 outline-none py-3 px-2" type="email" name="email"
-                                   placeholder="Email"></input type="email" >
+                                   placeholder="Email" required></input type="email" >
                         </div>
                     </div>
                     <div class="m-5 text-center rounded-sm">
                         <!-- <div class="col-span-2 bg-red-200 "></div> -->
                         <div class="border-l-4 border-[#FFFF00] rounded-sm">
                             <input class="w-full bg-gray-50 outline-none py-3 px-2" type="password" name="password"
-                                   placeholder="Password"></input type="email" >
+                                   placeholder="Password" required></input type="email" >
                         </div>
                     </div>
                 </div>
