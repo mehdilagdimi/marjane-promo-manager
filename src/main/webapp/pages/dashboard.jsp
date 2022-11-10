@@ -18,24 +18,28 @@
 
 <div class="flex flex-row h-full w-full absolute top-20">
     <%@ include file="../layout/dashboardSidebar.jsp" %>
-    <div class="ml-16 sm:ml-56 mr-8 sm:mr-14 relative w-full">
+    <div class="ml-16 lg:ml-56 mr-8 sm:mr-14 relative w-full">
         <div class='${recordstype.equals("manager") && role.equals("superadmin")? "flex" : "hidden"} justify-end mx-6 my-2'>
             <button onclick="toggleDisplayForm()" class="bg-[#0043BD] py-3 px-12 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]">New</button>
         </div>
         <%@ include file="../layout/addManager.jsp" %>
 
         <c:if test='${recordstype.equals("promotion")}'>
-            <div class="relative w-full flex flex-wrap w-full bottom-0 top-[500px] z-50">
-                <c:if test='${role.equals("manager") || role.equals("superadmin")}'>
-                    <%@ include file="../layout/promotionDetails.jsp" %>
-                </c:if>
-                <c:if test='${role.equals("sectionmanager")}'>
-                    <%@ include file="../layout/editStatusPromotionDetails.jsp" %>
-                </c:if>
+            <div class="w-full flex flex-col flex-wrap w-full">
+                <div class="relative w-full bottom-0 top-[500px] z-[99]">
+                    <c:if test='${role.equals("manager") || role.equals("superadmin")}'>
+                        <%@ include file="../layout/promotionDetails.jsp" %>
+                    </c:if>
+                    <c:if test='${role.equals("manager")}'>
+                        <%@ include file="../layout/addPromotion.jsp" %>
+                    </c:if>
+                </div>
+                <div class="relative bottom-0 top-[500px] z-50">
+                    <c:if test='${role.equals("sectionmanager")}'>
+                        <%@ include file="../layout/editStatusPromotionDetails.jsp" %>
+                    </c:if>
+                </div>
 
-                <c:if test='${role.equals("manager")}'>
-                    <%@ include file="../layout/addPromotion.jsp" %>
-                </c:if>
             </div>
             <div class="flex justify-end mx-6 my-2 py-3">
                 <c:if test='${role.equals("manager")}'>
