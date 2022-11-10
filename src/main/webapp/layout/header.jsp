@@ -37,13 +37,13 @@
                 <div class="relative flex justify-end items-center rounded-full sm:px-4 mr-4" onclick="showProfileIconMenu()">
                     <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_cz6ukw4q.json" class="cursor-pointer h-20 w-24 mr-8"
                                    background="transparent" speed="1" loop autoplay></lottie-player>
-                    <div class="absolute cursor-pointer top-14 right-14 z-[999] hidden flex justify-center items-center p-3" id="userIconMenu">
+                    <div class="absolute top-14 right-14 z-[999] hidden flex justify-center items-center p-3" id="userIconMenu">
                         <ul class="list-none block bg-white border rounded-md w-[200px]">
                             <li class="p-3 text-center hover:bg-gray-50">
                                 Profile
                             </li>
                             <li class="p-3 text-center hover:bg-gray-50">
-                                <a class="cursor-pointer" href="<%=application.getInitParameter("url")%>LogoutServlet">Logout</a>
+                                <a href="<%=application.getInitParameter("url")%>LogoutServlet">Logout</a>
                             </li>
                         </ul>
                     </div>

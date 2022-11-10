@@ -64,6 +64,12 @@ public class PromotionController<T> {
         //set this current manager object reference in BeanLambdaSetters class in order to get its corresponding setters as lambda expressions
         BeanController.add(promotion, Promotion.class, request, params);
     }
+    public void updatePromotionStatusAndComment(HttpServletRequest request, String findFirst){
+        Promotion promotion = BeanController.find(Integer.valueOf(request.getParameter(findFirst)), Promotion.class);
+        request.setAttribute("status", request.getParameter("status"));
+        request.setAttribute("comment", request.getParameter("comment"));
+        BeanController.update(promotion, Promotion.class, request, "status", "comment");
+    }
     public void updatePromotionStatus(HttpServletRequest request){
         Promotion promotion = (Promotion) request.getAttribute("promotion");
         promotion.setStatus((String)request.getAttribute("status"));
@@ -74,7 +80,5 @@ public class PromotionController<T> {
         promotion.setComment((String)request.getAttribute("comment"));
         BeanController.simpleUpdate(promotion, Promotion.class);
     }
-
-
 
 }

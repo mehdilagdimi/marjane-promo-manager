@@ -130,12 +130,16 @@ public class Promotion implements getBeanSettersFI {
         BeanSetterFI<Timestamp> beanSetValidUntil = this::setValidUntil;
         BeanSetterFI<List<Category>> beanSetSubCategory = this::addSubCategory;
         BeanSetterFI<Center> beanSetCenter = this::setCenter;
+        BeanSetterFI<String> beanSetStatus = this::setStatus;
+        BeanSetterFI<String> beanSetComment = this::setComment;
 
         beanSettersAsLambdasMap = new HashMap<>(Map.ofEntries(
                 Map.entry("percentage", beanSetPercentage),
                 Map.entry("validUntil", beanSetValidUntil),
                 Map.entry("subcategories", beanSetSubCategory),
-                Map.entry("center", beanSetCenter)
+                Map.entry("center", beanSetCenter),
+                Map.entry("status", beanSetStatus),
+                Map.entry("comment", beanSetComment)
         ));
         return beanSettersAsLambdasMap;
     }

@@ -24,21 +24,31 @@
         </div>
         <%@ include file="../layout/addManager.jsp" %>
 
-        <c:if test='${role.equals("manager") && recordstype.equals("promotion")}'>
+        <c:if test='${recordstype.equals("promotion")}'>
             <div class="relative w-full flex flex-wrap w-full bottom-0 top-[500px] z-50">
-                <%@ include file="../layout/promotionDetails.jsp" %>
-                <%@ include file="../layout/addPromotion.jsp" %>
+                <c:if test='${role.equals("manager") || role.equals("superadmin")}'>
+                    <%@ include file="../layout/promotionDetails.jsp" %>
+                </c:if>
+                <c:if test='${role.equals("sectionmanager")}'>
+                    <%@ include file="../layout/editStatusPromotionDetails.jsp" %>
+                </c:if>
+
+                <c:if test='${role.equals("manager")}'>
+                    <%@ include file="../layout/addPromotion.jsp" %>
+                </c:if>
             </div>
-            <div class="flex justify-end mx-6 my-2">
-                <a href="#addPromotionForm"><button onclick="toggleDisplayAddPromotionForm()" class="bg-[#0043BD] py-3 px-12 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]">New</button></a>
+            <div class="flex justify-end mx-6 my-2 py-3">
+                <c:if test='${role.equals("manager")}'>
+                    <a href="#addPromotionForm"><button onclick="toggleDisplayAddPromotionForm()" class="bg-[#0043BD] py-3 px-12 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]">New</button></a>
+                </c:if>
             </div>
         </c:if>
         <c:choose>
             <c:when test="${records != null}">
                 <div class="z-50 mx-4 my-2 overflow-x-auto no-scroll absolute left-4 right-0 editPromotionForm" id="recordsDivId">
-                    <div class="overflow-y-auto bg-white flex flex-col min-w-[1400px] h-[400px]">
+                    <div class="overflow-y-auto bg-white flex flex-col min-w-[1400px] h-[450px]">
                                     <c:if test='${recordstype.equals("promotion")}'>
-                                        <div class="sticky top-0 bg-gray-200  p-6 grid grid-cols-5 text-center text-md font-semibold mx-3 my-2 shadow-sm rounded-sm ">
+                                        <div class="sticky top-0 bg-gray-200  p-6 grid grid-cols-5 text-center text-md font-semibold mx-3 my-2 shadow-sm rounded-sm">
                                             <div class="block">ID</div>
                                             <div class="block">Status</div>
                                             <div class="block">Valid Until</div>
@@ -97,7 +107,7 @@
                                     </c:if>
 
                                     <c:if test='${recordstype.equals("sectionmanager")}'>
-                                        <div class="w-full bg-gray-50 p-4 grid grid-cols-5 text-center text-md font-semibold mx-3 my-2 shadow-sm rounded-sm">
+                                        <div class="sticky top-0 bg-gray-200  p-6 grid grid-cols-5 text-center text-md font-semibold mx-3 my-2 shadow-sm rounded-sm">
                                             <div class="block">ID</div>
                                             <div class="block">Name</div>
                                             <div class="block">Email</div>
@@ -128,7 +138,7 @@
                                     </c:if>
 
                                     <c:if test='${recordstype.equals("manager")}'>
-                                        <div class="w-full bg-gray-50 p-4 grid grid-cols-5 text-center text-md font-semibold mx-3 my-2 shadow-sm rounded-sm">
+                                        <div class="sticky top-0 bg-gray-200  p-6 grid grid-cols-5 text-center text-md font-semibold mx-3 my-2 shadow-sm rounded-sm">
                                             <div class="block">ID</div>
                                             <div class="block">Name</div>
                                             <div class="block">Email</div>

@@ -49,19 +49,17 @@ public class BeanController{
 
         IntStream.range(0, params.length).forEach( i -> {
             BeanLambdaSetters.getBeanLambdaSetters(bean).get(params[i]).set(request.getAttribute(params[i]));
-//            BeanLambdaSetters.getBeanLambdaSetters(bean.getClass().getSimpleName()).get(i).set(request.getAttribute(params[i]));
         });
 
         daoExecuter.save(bean);
         return bean;
     }
 
-    public static<T extends getBeanSettersFI> void update(T bean, Class<T> beanImpl, String[] params, BeanSetterFI[] beanSetters, HttpServletRequest request){
+    public static<T extends getBeanSettersFI> void update(T bean, Class<T> beanImpl,HttpServletRequest request, String... params){
         daoExecuter.setType(beanImpl);
 
         IntStream.range(0, params.length).forEach(i -> {
             BeanLambdaSetters.getBeanLambdaSetters(bean).get(params[i]).set(request.getAttribute(params[i]));
-//            beanSetters[i].set(request.getParameter(params[i]));
         });
 
         daoExecuter.update(bean);
@@ -71,21 +69,7 @@ public class BeanController{
         daoExecuter.update(bean);
     }
 
-//    public static<T1, T2> void updateBean(T1 bean, Class<T1> beanImpl, List<T2> params, BeanSetterFI[] beanSetters, HttpServletRequest request){
-//        daoExecuter.setType(beanImpl);
-//
-//        IntStream.range(0, beanSetters.length).forEachOrdered(i -> {
-//            beanSetters[i].set(params.get(i));
-//        });
-//
-//        daoExecuter.update(bean);
-//    }
-//    public static<T1, T2> void updateBean(T1 bean, Class<T1> beanImpl, T2 param, BeanSetterFI beanSetter){
-//        daoExecuter.setType(beanImpl);
-//        beanSetter.set(param);
-//        daoExecuter.update(bean);
-//    }
-//
+
     public static<T> void delete(T bean, Class<T> beanImpl){
         daoExecuter.setType(beanImpl);
         daoExecuter.save(bean);

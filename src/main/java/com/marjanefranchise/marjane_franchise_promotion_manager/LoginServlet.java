@@ -41,18 +41,18 @@ public class LoginServlet extends HttpServlet {
             superAdminSideBarContent.put("Statistics", new String[] {"#", "fa-solid fa-chart-pie"});
             superAdminSideBarContent.put("Promotion", new String[] {"PromotionServlet?get=all", "fa-solid fa-percent"});
             superAdminSideBarContent.put("SectionManager" , new String[] {"SectionManagerServlet?get=all", "fa-solid fa-people-roof"});
-            superAdminSideBarContent.put("Category", new String[] {"#", "fa-solid fa-layer-group"});
+//            superAdminSideBarContent.put("Category", new String[] {"#", "fa-solid fa-layer-group"});
             superAdminSideBarContent.put("Manager", new String[] {"ManagerServlet?get=all","fa-solid fa-people-roof"});
-            superAdminSideBarContent.put("Center", new String[] {"#", "fa-solid fa-shop"});
+//            superAdminSideBarContent.put("Center", new String[] {"#", "fa-solid fa-shop"});
 
         Map<String, String[]> managerSideBarContent = new LinkedHashMap<>();
-            managerSideBarContent.put("Statistics", new String[] {"#", "fa-solid fa-chart-pie"});
+//            managerSideBarContent.put("Statistics", new String[] {"#", "fa-solid fa-chart-pie"});
             managerSideBarContent.put("Promotion", new String[] {"PromotionServlet?get=all", "fa-solid fa-percent"});
-            managerSideBarContent.put("Category",new String[] {"#", "fa-solid fa-layer-group"});
+//            managerSideBarContent.put("Category",new String[] {"#", "fa-solid fa-layer-group"});
             managerSideBarContent.put("SectionManager" , new String[] {"SectionManagerServlet?get=all","fa-solid fa-people-roof"});
 
         Map<String, String[]> sectionManagerSideBarContent = new LinkedHashMap<>();
-            sectionManagerSideBarContent.put("Statistics", new String[] {"#", "fa-solid fa-chart-pie"});
+//            sectionManagerSideBarContent.put("Statistics", new String[] {"#", "fa-solid fa-chart-pie"});
             sectionManagerSideBarContent.put("Promotion", new String[] {"PromotionServlet?get=all", "fa-solid fa-percent"});
 
         Map<String, Map<String, String[]>> sideBarContentMap = new LinkedHashMap<>(Map.ofEntries(

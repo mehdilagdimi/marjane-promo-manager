@@ -50,6 +50,7 @@ public class PromotionServlet extends HttpServlet {
                    if(request.getSession().getAttribute("role").equals("manager")){
                        promotionList = promotionController.getAllForManager(id);
                        categoryList = new CategoryController().getAllSubCategory();
+                       request.getSession().setAttribute("subcategoriesoptions", categoryList);
                    }
                     else if(request.getSession().getAttribute("role").equals("sectionmanager")){
 //                        if(promotionController.checkAuthorizedAccessForManager()){
@@ -62,10 +63,6 @@ public class PromotionServlet extends HttpServlet {
                 System.out.println(" test test db db");
                 request.getSession().setAttribute("records", promotionList);
                 request.getSession().setAttribute("recordstype", "promotion");
-                request.getSession().setAttribute("subcategoriesoptions", categoryList);
-                for (Category category : categoryList) {
-                    System.out.println(" categor " + category.getName());
-                }
                 request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
            }
 
@@ -89,23 +86,20 @@ public class PromotionServlet extends HttpServlet {
                 System.out.println(" ADDING PROMOTION ");
                 promotionController.addPromotion(request,  "percentage", "validUntil", "subcategories", "center");
             }
-            if (Arrays.stream(params).anyMatch(param -> param.equals("status"))){
-                if(request.getParameter("promotion")!= null){
-                    Promotion promotion = BeanController.find(1, Promotion.class);
-                    request.setAttribute("promotion", promotion);
-                    request.setAttribute("status", "accepter");
-                    promotionController.updatePromotionStatus(request);
+            if (Arrays.stream(params).anyMatch(param -> param.equals("status")) && Arrays.stream(params).anyMatch(param -> param.equals("status"))){
+                if(request.getParameter("promotionId")!= null){
+                    promotionController.updatePromotionStatusAndComment(request, "promotionId");
                 }
             }
-            if(Arrays.stream(params).anyMatch(param -> param.equals("comment"))){
-                if(request.getParameter("promotion")!= null){
-                    Promotion promotion = BeanController.find(1, Promotion.class);
-                    request.setAttribute("promotion", promotion);
-                    request.setAttribute("comment", "Quantité de stock suffisante : 80");
-                    promotionController.addPromotionComment(request);
-                }
-            }
-            response.sendRedirect( baseURL + "pages/dashboard.jsp");
+//            if(Arrays.stream(params).anyMatch(param -> param.equals("comment"))){
+//                if(request.getParameter("promotion")!= null){
+//                    Promotion promotion = BeanController.find(1, Promotion.class);
+//                    request.setAttribute("promotion", promotion);
+//                    request.setAttribute("comment", "Quantité de stock suffisante : 80");
+//                    promotionController.addPromotionComment(request);
+//                }
+//            }
+            request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
         }
     }
 }
