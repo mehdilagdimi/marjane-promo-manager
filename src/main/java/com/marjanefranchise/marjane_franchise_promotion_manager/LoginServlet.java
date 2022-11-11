@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
         // get request parameters for userID and password
         String email = request.getParameter("email");
         String passw = request.getParameter("password");
+        boolean isInvalid = false;
 
         Map<String, String> titleMap = new LinkedHashMap<>();
             titleMap.put("superadmin", "Super Admin Dashboard");
@@ -91,6 +92,8 @@ public class LoginServlet extends HttpServlet {
 //                response.addCookie(userName);
                 response.sendRedirect(baseURL + "pages/dashboard.jsp");
                 return;
+            } else {
+                isInvalid = true;
             }
         } else if(AuthController.checkEmailExist(email, SectionManager.class)) {
             if(AuthController.checkAccountExist(email, passw, SectionManager.class) != null){
@@ -101,14 +104,16 @@ public class LoginServlet extends HttpServlet {
                 request.getSession().setAttribute("role", "sectionmanager");
                 request.getSession().setMaxInactiveInterval(30*60);
                 response.sendRedirect(baseURL + "pages/dashboard.jsp");
-            }
-
-        }
-        else {
-                request.getRequestDispatcher("pages/loginPage.jsp").forward(request,response);
-            PrintWriter out= response.getWriter();
-            out.println("<font color=red>Either user name or password is wrong.</font>");
                 return;
+            } else {
+                isInvalid = true;
+            }
+        }
+        //in case of invalid credentials
+        if(isInvalid){
+            request.setAttribute("invalidCredentials", true);
+            request.getRequestDispatcher("pages/loginPage.jsp").forward(request,response);
+            return;
         }
 
     }

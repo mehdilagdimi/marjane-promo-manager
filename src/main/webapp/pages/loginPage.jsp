@@ -44,12 +44,17 @@
                                    placeholder="Password" required></input type="email" >
                         </div>
                     </div>
+<%--                    <c:if test='${invalidCredentials != null}'>--%>
+                        <div class="${invalidCredentials != null? "block" : "hidden"} m-5 text-center rounded-sm">
+                            <!-- <div class="col-span-2 bg-red-200 "></div> -->
+                            <h4 class="text-sm font-light italic text-red-500">Invalid credentials, try again</h4>
+                        </div>
+<%--                    </c:if>--%>
                 </div>
                 <div class="text-center w-full px-5" id="btnContainerId">
 
                     <button type="submit" id="submitBtnId"
                             class="w-full bg-[#0043BD] shadow-sm rounded-sm py-3 text-white font-semibold"
-
                     >
                         SUBMIT
                     </button>

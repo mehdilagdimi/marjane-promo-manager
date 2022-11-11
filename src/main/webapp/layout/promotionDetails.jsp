@@ -8,9 +8,9 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div class="${selectedPromotion != null ? 'flex' : 'hidden'} w-full bottom-0 top-[470px] lg:top-80 my-2 absolute flex-col justify-center items-start" id="editPromotionForm">
+<div class="${selectedPromotion != null ? 'flex' : 'hidden'} w-full bottom-0 z-[999] top-[470px] md:top-[280px] my-2 absolute flex-col justify-center items-start" id="editPromotionForm">
     <form action="" method="post" class="z-50 w-full mx-10 flex flex-col w-[200px] sm:w-[350px] lg:w-[420px] xl-[500px] 2xl:w-[650px] items-center shadow-sm">
-        <div class="mx-10 w-full flex justify-end">
+        <div class="mx-10 w-full ${recordstype.equals("promotion") && role.equals("superadmin") ? "flex" : "hidden"} justify-end">
             <div class="bg-[#0043BD] cursor-pointer mb-2 py-3 px-12 mx-2 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]"
                 onclick="toggleDisplayeditPromotionForm()">
                 Hide
@@ -63,7 +63,7 @@
         </div>
         <div class="w-full flex justify-start flex-wrap mx-3 mb-1">
                 <div class="block px-3"><h4>Status :</h4></div>
-                <div class="w-full block px-3 py-4 m-2 text-center ${selectedPromotion.getStatus().equals("accepter") ? "text-green-500 " : selectedPromotion.getStatus().equals("en cours") ? "text-yellow-500" : "text-red-500"} font-semibold text-lg bg-gray-50 border shadow-sm rounded-md">${selectedPromotion.getStatus()}</div>
+                <div class="w-full block px-3 py-4 m-2 text-center ${selectedPromotion.getStatus().equals("accepted") ? "text-green-500 " : selectedPromotion.getStatus().equals("waiting") ? "text-yellow-500" : "text-gray-500"} font-semibold text-lg bg-gray-50 border shadow-sm rounded-md">${selectedPromotion.getStatus()}</div>
         </div>
 
     </form>

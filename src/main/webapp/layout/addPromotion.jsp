@@ -13,11 +13,11 @@
     String minDate = TimeUtil.timestampToHtmlDateTimeLocal(Timestamp.from(Instant.now()).toString());
     System.out.println(" min date " + minDate);
 %>
-<div class="hidden w-full bottom-0  z-[99] top-[-420px] md:top-20 absolute flex justify-center items-center" id="addPromotionForm">
+<div class="hidden w-full bottom-0 z-[99] top-[-420px] md:top-10 absolute flex justify-center items-center" id="addPromotionForm">
     <div class="p-4">
         <form action="<%=application.getInitParameter("url")%>PromotionServlet?post=promotion" method="post"
-              class="bg-gray-50 md:bg-transparent w-full flex flex-col items-end shadow-sm">
-            <div class="w-full h-full flex flex-col items-center md:items-end">
+              class="bg-gray-50 md:bg-transparent w-full flex flex-col items-end shadow-sm rounded-lg">
+            <div class="w-full h-full flex pt-4 flex-col items-center md:items-end">
                 <div class="flex justify-start flex-wrap mx-3 mb-6 w-[200px]  md:w-[200px] lg:w-[250px] xl:w-[500px]">
                     <div class="w-full md:w-[500px] px-3 mb-6 md:mb-0">
                         <label class="w-full block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

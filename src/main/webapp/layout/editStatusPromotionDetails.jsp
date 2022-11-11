@@ -8,8 +8,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div class="${selectedPromotion != null ? 'flex' : 'hidden'} w-full bottom-0 top-60 my-2 absolute flex-col justify-center items-start" id="editPromotionForm">
-    <div class="mx-10 w-full flex justify-end">
+<div class="${selectedPromotion != null ? 'flex' : 'hidden'} w-full bottom-0 top-[200px] my-2 absolute flex-col justify-center items-start" id="editPromotionForm">
+    <div class="mx-auto w-full flex justify-end">
         <div class="bg-[#0043BD] cursor-pointer mb-2 py-3 px-12 mx-2 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]"
              onclick="toggleDisplayeditPromotionForm()">
             Hide
