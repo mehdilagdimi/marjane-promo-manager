@@ -2,13 +2,15 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.controller;
 
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Center;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
+import com.marjanefranchise.marjane_franchise_promotion_manager.util.EmailService.EmailHelper;
+import com.marjanefranchise.marjane_franchise_promotion_manager.util.EmailService.SimpleEmail;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
 
 public class ManagerController {
-
+    private String tempPassw;
     public List<Manager> getAll(){
         return BeanController.getAll(Manager.class);
     }
@@ -22,4 +24,14 @@ public class ManagerController {
         BeanController.add(manager, Manager.class, request, params);
     }
 
+    public void sendEmail(String email){
+        String passw = EmailHelper.codeGenerator();
+        String msg = ""
+                + "<h2>Marjane Back-Office : Auto-generated Password for temporary use</h2><br>"
+                + "<h4 style=\"font-weight: normal;\">An account has been created for you to access your dashboard</h4><br>"
+                + "<h4 style=\"font-weight: normal;\">Email : " + email + "</h4><br>"
+                + "<h4 style=\"font-weight: normal;\">Password : " + passw + "</h4><br>"
+                ;
+        SimpleEmail.sendSimpleEmail(email, "Temporary Password", msg);
+    }
 }

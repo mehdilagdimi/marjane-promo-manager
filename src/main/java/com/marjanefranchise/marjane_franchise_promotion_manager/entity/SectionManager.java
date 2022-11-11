@@ -4,6 +4,8 @@ import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanSetterF
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.Person;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.getBeanSettersFI;
 import jakarta.persistence.*;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.*;
 
@@ -46,16 +48,6 @@ public class SectionManager extends Person implements getBeanSettersFI {
         this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return "SectionManager{" +
-//                "center=" + center +
-//                ", category=" + category +
-                ", id=" + id +
-                ", fullname='" + fullname + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 
     @Override
     public Map<String, BeanSetterFI> getSetters(){
@@ -74,5 +66,32 @@ public class SectionManager extends Person implements getBeanSettersFI {
                 Map.entry("category", beanSetCategory)
         ));
         return beanSettersAsLambdasMap;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SectionManager that = (SectionManager) o;
+
+        return new EqualsBuilder().append(center, that.center).append(category, that.category).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(center).append(category).toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "SectionManager{" +
+//                "center=" + center +
+//                ", category=" + category +
+                ", id=" + id +
+                ", fullname='" + fullname + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

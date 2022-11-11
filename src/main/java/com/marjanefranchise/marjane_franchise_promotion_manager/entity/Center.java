@@ -1,6 +1,8 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.entity;
 
 import jakarta.persistence.*;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +61,22 @@ public class Center {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Center center = (Center) o;
+
+        return new EqualsBuilder().append(id, center.id).append(city, center.city).append(manager, center.manager).append(sectionManager, center.sectionManager).append(promotion, center.promotion).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(id).append(city).append(manager).append(sectionManager).append(promotion).toHashCode();
     }
 
     @Override

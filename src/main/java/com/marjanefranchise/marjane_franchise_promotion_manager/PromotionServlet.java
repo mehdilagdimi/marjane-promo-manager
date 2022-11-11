@@ -91,14 +91,6 @@ public class PromotionServlet extends HttpServlet {
                     promotionController.updatePromotionStatusAndComment(request, "promotionId");
                 }
             }
-//            if(Arrays.stream(params).anyMatch(param -> param.equals("comment"))){
-//                if(request.getParameter("promotion")!= null){
-//                    Promotion promotion = BeanController.find(1, Promotion.class);
-//                    request.setAttribute("promotion", promotion);
-//                    request.setAttribute("comment", "Quantité de stock suffisante : 80");
-//                    promotionController.addPromotionComment(request);
-//                }
-//            }
             response.sendRedirect(baseURL + "PromotionServlet?get=all");
         }
     }

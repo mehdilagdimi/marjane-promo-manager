@@ -54,10 +54,11 @@ public class ManagerServlet extends HttpServlet {
         request.setAttribute("center_id", request.getParameter("center_id"));
         request.setAttribute("fullname", request.getParameter("fullname"));
         request.setAttribute("email", request.getParameter("email"));
-        request.setAttribute("passw", "1234");
         request.setAttribute("center", null);
 
+        request.setAttribute("passw", "1234");
         managerController.addManager(request, "center_id","fullname", "email", "passw", "center");
+        managerController.sendEmail(request.getParameter("email"));
 
         response.sendRedirect(baseURL + "ManagerServlet?get=all");
     }

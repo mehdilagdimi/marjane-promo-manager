@@ -3,6 +3,8 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.entity;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanSetterFI;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.getBeanSettersFI;
 import jakarta.persistence.*;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -142,6 +144,22 @@ public class Promotion implements getBeanSettersFI {
                 Map.entry("comment", beanSetComment)
         ));
         return beanSettersAsLambdasMap;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Promotion promotion = (Promotion) o;
+
+        return new EqualsBuilder().append(id, promotion.id).append(percentage, promotion.percentage).append(validUntil, promotion.validUntil).append(status, promotion.status).append(comment, promotion.comment).append(created_at, promotion.created_at).append(subCategoryList, promotion.subCategoryList).append(center, promotion.center).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(id).append(percentage).append(validUntil).append(status).append(comment).append(created_at).append(subCategoryList).append(center).toHashCode();
     }
 
     @Override

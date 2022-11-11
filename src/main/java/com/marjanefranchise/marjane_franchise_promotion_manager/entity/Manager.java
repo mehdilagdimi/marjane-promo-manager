@@ -4,6 +4,8 @@ import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanSetterF
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.Person;
 import com.marjanefranchise.marjane_franchise_promotion_manager.base.getBeanSettersFI;
 import jakarta.persistence.*;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serializable;
 import java.util.*;
@@ -57,6 +59,22 @@ public class Manager extends Person implements Serializable, getBeanSettersFI {
 
         ));
         return beanSettersAsLambdasMap;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Manager manager = (Manager) o;
+
+        return new EqualsBuilder().append(id, manager.id).append(fullname, manager.fullname).append(email, manager.email).append(passw, manager.passw).append(center, manager.center).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(center).toHashCode();
     }
 
     @Override

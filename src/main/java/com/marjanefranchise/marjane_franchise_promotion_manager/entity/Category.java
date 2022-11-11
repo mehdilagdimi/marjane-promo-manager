@@ -1,6 +1,8 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.entity;
 
 import jakarta.persistence.*;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -132,6 +134,22 @@ public class Category  implements Serializable {
     public Category removePromotion(Promotion promotion){
         promotionList.remove(promotion);
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Category category = (Category) o;
+
+        return new EqualsBuilder().append(id, category.id).append(name, category.name).append(sectionManager, category.sectionManager).append(parent, category.parent).append(subCategories, category.subCategories).append(promotionList, category.promotionList).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(id).append(name).append(sectionManager).append(parent).append(subCategories).append(promotionList).toHashCode();
     }
 
     @Override
