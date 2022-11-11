@@ -35,10 +35,6 @@ public class PromotionController<T> {
                    .filter(promotion -> promotion.getSubCategoryList().stream().anyMatch(category -> category.getParent() ==  sectionManager.getCategory()))
                    .collect(Collectors.toList());
     }
-//    public List<SectionManager> getAllBySectionManager(HttpServletRequest request){
-//        int id = ((SectionManager)request.getSession().getAttribute("user")).getId();
-//        return BeanController.customSelectQuerySingleParam(SectionManager.class, Integer.class, "center", center_id);
-//    }
 
     public boolean checkAuthorizedAccessForManager(){
         LocalTime start = LocalTime.parse("08:00");

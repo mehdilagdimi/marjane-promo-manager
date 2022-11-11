@@ -1,10 +1,7 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.controller;
 
-import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanLambdaSetters;
-import com.marjanefranchise.marjane_franchise_promotion_manager.base.BeanSetterFI;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Center;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
-import com.marjanefranchise.marjane_franchise_promotion_manager.entity.SectionManager;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;

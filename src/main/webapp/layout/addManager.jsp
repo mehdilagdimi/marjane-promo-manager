@@ -28,15 +28,21 @@
         </div>
       </div>
       <div class="flex justify-start flex-wrap mx-3 mb-2">
+
         <div class="w-full md:w-[500px] px-3 mb-6 md:mb-0">
-          <label class="w-full block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+          <label class="w-full block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="market">
             Market
           </label>
-          <input name="center_id" class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="City">
-          <input name="center_idfornext" type="hidden">
-          <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+          <select name="center_id" id="market" class="form-multiselect block w-full mt-1">
+            <c:if test="${markets != null}">
+              <c:forEach var="market" items="${markets}">
+                <option value="${market.getId()}">${market.getId()} ${market.getCity()}</option>
+              </c:forEach>
+            </c:if>
+          </select>
         </div>
       </div>
+
       <div class="flex justify-end m-6">
         <button type="submit" class="bg-[#0043BD] py-3 px-12 shadow-sm rounded-sm text-white font-semibold hover:bg-yellow-500 hover:text-[#0043BD]">Submit</button>
       </div>

@@ -14,12 +14,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "ManagerServlet", value = "/ManagerServlet")
 public class ManagerServlet extends HttpServlet {
     private ManagerController managerController;
+    String baseURL;
     @Override
     public void init() throws ServletException {
+        baseURL = getServletContext().getInitParameter("url");
         managerController = new ManagerController();
     }
 
@@ -32,12 +35,15 @@ public class ManagerServlet extends HttpServlet {
             if (request.getSession().getAttribute("role") == "superadmin") {
                 if (request.getParameter("get").equals("all")) {
                     managerList = managerController.getAll();
+                    request.getSession().setAttribute(
+                            "markets",
+                            BeanController.getAll(Center.class).stream().filter(center -> center.getManager() == null).collect(Collectors.toList())
+                    );
                 }
-            } else if (request.getSession().getAttribute("role") == "manager") {
-                //            sectionManagerController.getById();
             }
-            request.setAttribute("records", managerList);
-            request.setAttribute("recordstype", "manager");
+
+            request.getSession().setAttribute("records", managerList);
+            request.getSession().setAttribute("recordstype", "manager");
             request.getRequestDispatcher("pages/dashboard.jsp").forward(request, response);
         }
 
@@ -53,6 +59,6 @@ public class ManagerServlet extends HttpServlet {
 
         managerController.addManager(request, "center_id","fullname", "email", "passw", "center");
 
-        request.getRequestDispatcher("pages/dashboard.jsp").forward(request, response);
+        response.sendRedirect(baseURL + "ManagerServlet?get=all");
     }
 }

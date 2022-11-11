@@ -26,7 +26,6 @@ public class PromotionServlet extends HttpServlet {
     String baseURL;
     @Override
     public void init() throws ServletException {
-        super.init();
         promotionController = new PromotionController();
         baseURL = getServletContext().getInitParameter("url");
     }
@@ -53,11 +52,12 @@ public class PromotionServlet extends HttpServlet {
                        request.getSession().setAttribute("subcategoriesoptions", categoryList);
                    }
                     else if(request.getSession().getAttribute("role").equals("sectionmanager")){
-//                        if(promotionController.checkAuthorizedAccessForManager()){
+                        if(promotionController.checkAuthorizedAccessForManager()){
                             promotionList = promotionController.getAllForSectionManager(request);
-//                        } else {
-//                            System.out.println(" Unauthorizd access promotions list : View of promotions only availabe btwn 8-12 ");
-//                        }
+                        } else {
+                            System.out.println(" Unauthorizd access promotions list : View of promotions only availabe btwn 8-12 ");
+                            request.setAttribute("unauthorizedAccess", true);
+                        }
                    }
                }
                 System.out.println(" test test db db");
@@ -99,7 +99,7 @@ public class PromotionServlet extends HttpServlet {
 //                    promotionController.addPromotionComment(request);
 //                }
 //            }
-            request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
+            response.sendRedirect(baseURL + "PromotionServlet?get=all");
         }
     }
 }

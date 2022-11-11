@@ -11,8 +11,6 @@ import java.io.IOException;
 @WebFilter("/*")
 public class AuthenticationFilter implements Filter {
 
-    public void destroy() {
-    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
