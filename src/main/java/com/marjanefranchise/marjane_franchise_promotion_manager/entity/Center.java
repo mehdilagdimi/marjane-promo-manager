@@ -74,10 +74,7 @@ public class Center {
         return new EqualsBuilder().append(id, center.id).append(city, center.city).append(manager, center.manager).append(sectionManager, center.sectionManager).append(promotion, center.promotion).isEquals();
     }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(id).append(city).append(manager).append(sectionManager).append(promotion).toHashCode();
-    }
+
 
     @Override
     public String toString() {

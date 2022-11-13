@@ -34,7 +34,6 @@ public class PromotionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //for testing doPost from direct browser requesting
 //        doPost(request, response);
-
         if(request.getParameter("get") != null){
             List<Promotion> promotionList = null;
             List<Category> categoryList = null;
@@ -60,7 +59,6 @@ public class PromotionServlet extends HttpServlet {
                         }
                    }
                }
-                System.out.println(" test test db db");
                 request.getSession().setAttribute("records", promotionList);
                 request.getSession().setAttribute("recordstype", "promotion");
                 request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);

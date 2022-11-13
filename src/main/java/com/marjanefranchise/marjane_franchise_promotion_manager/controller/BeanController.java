@@ -48,6 +48,7 @@ public class BeanController{
         daoExecuter.setType(beanImpl);
 
         IntStream.range(0, params.length).forEach( i -> {
+            System.out.println(" req " + request.getAttribute(params[i]));
             BeanLambdaSetters.getBeanLambdaSetters(bean).get(params[i]).set(request.getAttribute(params[i]));
         });
 

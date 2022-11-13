@@ -79,10 +79,6 @@ public class SectionManager extends Person implements getBeanSettersFI {
         return new EqualsBuilder().append(center, that.center).append(category, that.category).isEquals();
     }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(center).append(category).toHashCode();
-    }
 
     @Override
     public String toString() {

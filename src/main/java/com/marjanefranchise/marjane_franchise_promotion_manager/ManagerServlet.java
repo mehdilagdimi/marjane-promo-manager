@@ -6,6 +6,7 @@ import com.marjanefranchise.marjane_franchise_promotion_manager.controller.Manag
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Center;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.SectionManager;
+import com.marjanefranchise.marjane_franchise_promotion_manager.util.EmailService.EmailHelper;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 @WebServlet(name = "ManagerServlet", value = "/ManagerServlet")
 public class ManagerServlet extends HttpServlet {
-    private ManagerController managerController;
+    public ManagerController managerController;
     String baseURL;
     @Override
     public void init() throws ServletException {
@@ -55,10 +56,10 @@ public class ManagerServlet extends HttpServlet {
         request.setAttribute("fullname", request.getParameter("fullname"));
         request.setAttribute("email", request.getParameter("email"));
         request.setAttribute("center", null);
+        request.setAttribute("passw", EmailHelper.codeGenerator());
 
-        request.setAttribute("passw", "1234");
         managerController.addManager(request, "center_id","fullname", "email", "passw", "center");
-        managerController.sendEmail(request.getParameter("email"));
+        managerController.sendEmail(request);
 
         response.sendRedirect(baseURL + "ManagerServlet?get=all");
     }

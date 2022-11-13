@@ -2,7 +2,6 @@ package com.marjanefranchise.marjane_franchise_promotion_manager.entity;
 
 import jakarta.persistence.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -147,10 +146,6 @@ public class Category  implements Serializable {
         return new EqualsBuilder().append(id, category.id).append(name, category.name).append(sectionManager, category.sectionManager).append(parent, category.parent).append(subCategories, category.subCategories).append(promotionList, category.promotionList).isEquals();
     }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(id).append(name).append(sectionManager).append(parent).append(subCategories).append(promotionList).toHashCode();
-    }
 
     @Override
     public String toString() {

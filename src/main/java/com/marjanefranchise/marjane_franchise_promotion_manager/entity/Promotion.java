@@ -157,10 +157,7 @@ public class Promotion implements getBeanSettersFI {
         return new EqualsBuilder().append(id, promotion.id).append(percentage, promotion.percentage).append(validUntil, promotion.validUntil).append(status, promotion.status).append(comment, promotion.comment).append(created_at, promotion.created_at).append(subCategoryList, promotion.subCategoryList).append(center, promotion.center).isEquals();
     }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(id).append(percentage).append(validUntil).append(status).append(comment).append(created_at).append(subCategoryList).append(center).toHashCode();
-    }
+
 
     @Override
     public String toString() {

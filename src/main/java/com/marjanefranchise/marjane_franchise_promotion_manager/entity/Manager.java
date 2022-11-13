@@ -72,10 +72,6 @@ public class Manager extends Person implements Serializable, getBeanSettersFI {
         return new EqualsBuilder().append(id, manager.id).append(fullname, manager.fullname).append(email, manager.email).append(passw, manager.passw).append(center, manager.center).isEquals();
     }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(center).toHashCode();
-    }
 
     @Override
     public String toString() {

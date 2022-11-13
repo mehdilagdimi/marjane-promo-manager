@@ -1,6 +1,7 @@
 package com.marjanefranchise.marjane_franchise_promotion_manager.dao;
 
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Category;
+import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
 import com.marjanefranchise.marjane_franchise_promotion_manager.util.HibernateUtil.HibernateUtil;
 import jakarta.persistence.Table;
 import org.hibernate.Session;
