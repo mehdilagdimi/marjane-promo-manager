@@ -79,6 +79,11 @@ public class BeanController{
         daoExecuter.setType(beanImpl);
         return daoExecuter.count();
     }
+    public static<T> long namedQueryCount(Class<T> beanImpl, String namedQuery, String param, String value){
+        daoExecuter.setType(beanImpl);
+        return daoExecuter.namedQueryCount(namedQuery, param, value);
+    }
+
 
 
 }

@@ -9,36 +9,36 @@
         <param-value>http://localhost:8080/marjane_franchise_promotion_manager_war_exploded/</param-value>
     </context-param>
 
-    <env-entry>
-        <description>PSQL DIALECT</description>
-        <env-entry-name>DIALECT</env-entry-name>
-        <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>org.hibernate.dialect.PostgreSQLDialect</env-entry-value>
-    </env-entry>
-    <env-entry>
-        <description>PSQL DRIVER</description>
-        <env-entry-name>DRIVER</env-entry-name>
-        <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>org.postgresql.Driver</env-entry-value>
-    </env-entry>
-    <env-entry>
-        <description>DB URL</description>
-        <env-entry-name>URL</env-entry-name>
-        <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>jdbc:postgresql://localhost:5432/marjaneMarket</env-entry-value>
-<!--        <env-entry-value>jdbc:postgresql://localhost:5432/marjanemanagement</env-entry-value>-->
-    </env-entry>
-    <env-entry>
-        <description>DB User</description>
-        <env-entry-name>USER</env-entry-name>
-        <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>mehdilagdimi</env-entry-value>
-    </env-entry>
-    <env-entry>
-        <description>DB PASSW</description>
-        <env-entry-name>PASSW</env-entry-name>
-        <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>1234</env-entry-value>
-    </env-entry>
+<!--    <env-entry>-->
+<!--        <description>PSQL DIALECT</description>-->
+<!--        <env-entry-name>DIALECT</env-entry-name>-->
+<!--        <env-entry-type>java.lang.String</env-entry-type>-->
+<!--        <env-entry-value>org.hibernate.dialect.PostgreSQLDialect</env-entry-value>-->
+<!--    </env-entry>-->
+<!--    <env-entry>-->
+<!--        <description>PSQL DRIVER</description>-->
+<!--        <env-entry-name>DRIVER</env-entry-name>-->
+<!--        <env-entry-type>java.lang.String</env-entry-type>-->
+<!--        <env-entry-value>org.postgresql.Driver</env-entry-value>-->
+<!--    </env-entry>-->
+<!--    <env-entry>-->
+<!--        <description>DB URL</description>-->
+<!--        <env-entry-name>URL</env-entry-name>-->
+<!--        <env-entry-type>java.lang.String</env-entry-type>-->
+<!--        <env-entry-value>jdbc:postgresql://localhost:5432/marjaneMarket</env-entry-value>-->
+<!--&lt;!&ndash;        <env-entry-value>jdbc:postgresql://localhost:5432/marjanemanagement</env-entry-value>&ndash;&gt;-->
+<!--    </env-entry>-->
+<!--    <env-entry>-->
+<!--        <description>DB User</description>-->
+<!--        <env-entry-name>USER</env-entry-name>-->
+<!--        <env-entry-type>java.lang.String</env-entry-type>-->
+<!--        <env-entry-value>mehdilagdimi</env-entry-value>-->
+<!--    </env-entry>-->
+<!--    <env-entry>-->
+<!--        <description>DB PASSW</description>-->
+<!--        <env-entry-name>PASSW</env-entry-name>-->
+<!--        <env-entry-type>java.lang.String</env-entry-type>-->
+<!--        <env-entry-value>1234</env-entry-value>-->
+<!--    </env-entry>-->
 
 </web-app>

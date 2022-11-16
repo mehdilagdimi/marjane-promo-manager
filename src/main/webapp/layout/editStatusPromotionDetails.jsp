@@ -111,9 +111,6 @@
         refuseBtn.classList.remove("bg-red-500");
         refuseBtn.classList.remove("text-white");
 
-        let submitBtn =  document.getElementById("submitBtn");
-        submit.style.display = "block";
-
         displaySubmitBtn();
     }
 

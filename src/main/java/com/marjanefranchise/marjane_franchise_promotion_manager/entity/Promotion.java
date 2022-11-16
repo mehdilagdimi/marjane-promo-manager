@@ -11,6 +11,12 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.*;
 
+@NamedQuery(
+        name = "countAcceptedPromotions",
+        query = "SELECT COUNT(p) FROM Promotion p where p.status = :status"
+//            timeout = 1,
+//            fetchSize = 10
+)
 
 @Entity
 public class Promotion implements getBeanSettersFI {

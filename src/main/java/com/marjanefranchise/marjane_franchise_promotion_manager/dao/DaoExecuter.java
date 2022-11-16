@@ -72,4 +72,9 @@ public class DaoExecuter<T> extends TransactionExecuter{
         return  (long)executeTransaction(getCountExpression);
     }
 
+    public long namedQueryCount(String namedQuery, String param, String value){
+        getCountExpression = (s-> (T) s.createNamedQuery(namedQuery, type).setParameter(param, value).uniqueResult());
+        return (long) executeTransaction(getCountExpression);
+    }
+
 }

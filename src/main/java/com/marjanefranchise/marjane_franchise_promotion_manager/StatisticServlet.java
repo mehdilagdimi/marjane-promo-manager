@@ -3,6 +3,7 @@ package com.marjanefranchise.marjane_franchise_promotion_manager;
 import com.marjanefranchise.marjane_franchise_promotion_manager.controller.BeanController;
 import com.marjanefranchise.marjane_franchise_promotion_manager.controller.CategoryController;
 import com.marjanefranchise.marjane_franchise_promotion_manager.controller.PromotionController;
+import com.marjanefranchise.marjane_franchise_promotion_manager.controller.StatisticController;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Category;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Manager;
 import com.marjanefranchise.marjane_franchise_promotion_manager.entity.Promotion;
@@ -20,9 +21,11 @@ import java.util.stream.Collectors;
 
 @WebServlet(name = "StatisticServlet", value = "/StatisticServlet")
 public class StatisticServlet extends HttpServlet {
+    StatisticController statisticController;
     String baseURL;
     @Override
     public void init() throws ServletException {
+        statisticController = new StatisticController();
         baseURL = getServletContext().getInitParameter("url");
     }
 
@@ -41,6 +44,8 @@ public class StatisticServlet extends HttpServlet {
         request.getSession().setAttribute("managerCount", BeanController.count(Manager.class));
         request.getSession().setAttribute("categoryCount", BeanController.count(Category.class));
         request.getSession().setAttribute("sectionManagerCount", BeanController.count(SectionManager.class));
+        request.getSession().setAttribute("promotionStatusStatistics", statisticController.getPromotionStatusPercentages());
+
         request.getRequestDispatcher("pages/dashboard.jsp").forward(request,response);
     }
 

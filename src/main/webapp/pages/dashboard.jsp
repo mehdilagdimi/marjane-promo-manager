@@ -22,7 +22,7 @@
     System.out.println(" printing auht state " + auth);
 %>
 
-<div class="flex flex-row h-full w-full absolute top-20">
+<div class="flex flex-row  w-full absolute top-20">
     <%@ include file="../layout/dashboardSidebar.jsp" %>
     <div class="ml-16 lg:ml-56 mr-8 sm:mr-14 relative w-full">
         <div class='${recordstype.equals("manager") && role.equals("superadmin")? "flex" : "hidden"} justify-end mx-6 my-2'>
