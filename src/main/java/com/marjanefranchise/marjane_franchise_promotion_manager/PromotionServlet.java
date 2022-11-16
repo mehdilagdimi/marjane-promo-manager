@@ -51,11 +51,12 @@ public class PromotionServlet extends HttpServlet {
                        request.getSession().setAttribute("subcategoriesoptions", categoryList);
                    }
                     else if(request.getSession().getAttribute("role").equals("sectionmanager")){
+                        //Check section maanger time of access : Out of 8-12 => not allowed
                         if(promotionController.checkAuthorizedAccessForManager()){
                             promotionList = promotionController.getAllForSectionManager(request);
                         } else {
                             System.out.println(" Unauthorizd access promotions list : View of promotions only availabe btwn 8-12 ");
-                            request.setAttribute("unauthorizedAccess", true);
+                            request.getSession().setAttribute("unauthorizedAccess", "true");
                         }
                    }
                }

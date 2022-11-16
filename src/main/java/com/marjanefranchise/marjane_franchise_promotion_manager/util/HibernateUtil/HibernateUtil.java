@@ -28,7 +28,9 @@ public final class HibernateUtil {
         properties.setProperty("hibernate.connection.username", Config.getUSER());
         properties.setProperty("hibernate.connection.password", Config.getPASSWORD());
         properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.hbm2ddl.import_files", "/import.sql");
+//        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
 //        properties.setProperty(" hibernate.connection.pool_size", "10");
         configuration.setProperties(properties);
         configuration

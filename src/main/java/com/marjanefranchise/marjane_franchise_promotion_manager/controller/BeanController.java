@@ -75,5 +75,10 @@ public class BeanController{
         daoExecuter.setType(beanImpl);
         daoExecuter.save(bean);
     }
+    public static<T> long count(Class<T> beanImpl){
+        daoExecuter.setType(beanImpl);
+        return daoExecuter.count();
+    }
+
 
 }

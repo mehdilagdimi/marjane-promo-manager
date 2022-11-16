@@ -1,0 +1,33 @@
+version: "3"
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: mehdilagdimi
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB : marjaneMarket
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  marjane:
+    container_name: marjane_app
+    build: .
+    networks:
+      - postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
+volumes:
+  postgres:

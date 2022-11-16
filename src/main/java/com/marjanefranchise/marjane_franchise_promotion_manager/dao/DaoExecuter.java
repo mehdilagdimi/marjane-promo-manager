@@ -18,6 +18,7 @@ public class DaoExecuter<T> extends TransactionExecuter{
 
 
     TransactionGetExecuterFI<Session, List<T>> getListExpression;
+    TransactionGetExecuterFI<Session, T> getCountExpression;
     public DaoExecuter() {
 
     }
@@ -47,8 +48,6 @@ public class DaoExecuter<T> extends TransactionExecuter{
     }
 
     public List<T> getAll(){
-        System.out.println(" type " + typeStr);
-        System.out.println(" type get class " + type.getSimpleName());
         getListExpression = (s -> (List<T>) s.createQuery("SELECT m FROM "+ typeStr +" m", type).getResultList());
         return (List<T>) executeTransaction(getListExpression);
     }
@@ -66,6 +65,11 @@ public class DaoExecuter<T> extends TransactionExecuter{
     public void delete(T jpaBean){
         expression = (s -> s.remove(jpaBean));
         executeTransaction(expression);
+    }
+
+    public long count(){
+        getCountExpression = (s -> (T) s.createQuery("SELECT COUNT(*) FROM "+ typeStr +" m", type).uniqueResult());
+        return  (long)executeTransaction(getCountExpression);
     }
 
 }

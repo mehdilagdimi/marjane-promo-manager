@@ -1,0 +1,3 @@
+-- CREATE DATABASE IF NOT EXISTS
+CREATE SCHEMA IF NOT EXISTS testdb;
+INSERT INTO center (city) values ('Rabat');

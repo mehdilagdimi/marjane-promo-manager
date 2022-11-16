@@ -25,7 +25,8 @@
         <description>DB URL</description>
         <env-entry-name>URL</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>jdbc:postgresql://localhost:5432/marjanemanagement</env-entry-value>
+        <env-entry-value>jdbc:postgresql://localhost:5432/marjaneMarket</env-entry-value>
+<!--        <env-entry-value>jdbc:postgresql://localhost:5432/marjanemanagement</env-entry-value>-->
     </env-entry>
     <env-entry>
         <description>DB User</description>
