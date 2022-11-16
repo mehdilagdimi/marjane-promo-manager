@@ -15,45 +15,32 @@ class DaoExecuterTest {
         DaoExecuter<Category> daoExecuter = new DaoExecuter<>(Category.class);
 //        System.out.println(" adding electronics ");
         Category category = new Category();
-        category.setName("Nutrition");
+        System.out.println(" id " + category.getId());
+        category.setName("Test Category");
         category.setParent(null);
         daoExecuter.save(category);
+        assertNotEquals(0, category.getId());
     }
 
     @Test
     public void testInsertCenter(){
         DaoExecuter<Center> daoExecuter = new DaoExecuter<>(Center.class);
         Center center = new Center();
-        center.setCity("Safi");
+        center.setCity("Test City");
         daoExecuter.save(center);
+        assertNotEquals(0, center.getId());
     }
 
     @Test
-    Category testFindCategory() {
+    void testFindCategory() {
         int id = 1;
         DaoExecuter<Category> daoExecuter = new DaoExecuter<>(Category.class);
         Category category = daoExecuter.find(id);;
         System.out.println(" category name " + category.getName());
         assertEquals("Nutrition", category.getName());
-        return category;
-    }
-    @Test
-    Category testFindCategory(int id) {
-        if(id == 0) id = 1;
-        DaoExecuter<Category> daoExecuter = new DaoExecuter<>(Category.class);
-        Category category = daoExecuter.find(id);;
-        System.out.println(" category name " + category.getName());
-        assertEquals("Nutrition", category.getName());
-        return category;
     }
 
-    @Test
-    Center testFindCenter(int id) {
-        if(id == 0) id = 1;
-        DaoExecuter<Center> daoExecuter = new DaoExecuter<>(Center.class);
-        Center center = daoExecuter.find(id);;
-        return center;
-    }
+
 
     @Test
     void testFindCenter() {
@@ -61,27 +48,26 @@ class DaoExecuterTest {
         DaoExecuter<Center> daoExecuter = new DaoExecuter<>(Center.class);
         Center center = daoExecuter.find(id);;
         System.out.println(" center city " + center.getCity());
-//        System.out.println(" class " + Center.class.getSimpleName());
         assertEquals("Safi", center.getCity());
     }
 
     @Test
     public void testInsertSubCategory(){
         DaoExecuter<Category> daoExecuter = new DaoExecuter<>(Category.class);
-        Category category = testFindCategory(1);
+        Category category =  daoExecuter.find(1);
         Category subCategory = new Category();
         subCategory.setName("Fruits");
         subCategory.setParent(category);
         category.addSubCategory(subCategory);
         daoExecuter.save(category);
-//        categoryDao.addSubCategory(16);
+        assertNotEquals(0, category.getId());
     }
     @Test
     public void testGetAllCategory(){
         DaoExecuter<Category> daoExecuter = new DaoExecuter<>(Category.class);
         List<Category> listCategories = daoExecuter.getAll();
         listCategories.forEach(System.out::print);
-        //        categoryDao.addSubCategory(16);
+        assertEquals(12, listCategories.size());
     }
 
 

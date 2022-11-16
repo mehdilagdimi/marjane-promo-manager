@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
             titleMap.put("sectionmanager", "Section Manager Dashboard");
 
         Map<String, String[]> superAdminSideBarContent = new LinkedHashMap<>();
-            superAdminSideBarContent.put("Statistics", new String[] {"#", "fa-solid fa-chart-pie"});
+            superAdminSideBarContent.put("Statistics", new String[] {"StatisticServlet", "fa-solid fa-chart-pie"});
             superAdminSideBarContent.put("Promotion", new String[] {"PromotionServlet?get=all", "fa-solid fa-percent"});
             superAdminSideBarContent.put("SectionManager" , new String[] {"SectionManagerServlet?get=all", "fa-solid fa-people-roof"});
 //            superAdminSideBarContent.put("Category", new String[] {"#", "fa-solid fa-layer-group"});
@@ -75,7 +75,8 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("role", "superadmin");
             request.getSession().setMaxInactiveInterval(30*60);
-            response.sendRedirect(baseURL + "pages/dashboard.jsp");
+            response.sendRedirect(baseURL + "StatisticServlet");
+//            response.sendRedirect(baseURL + "PromotionServlet?get=all");
             return;
         }
 
@@ -90,7 +91,8 @@ public class LoginServlet extends HttpServlet {
 //                Cookie userName = new Cookie("user_", user);
 //                userName.setMaxAge(30*60);
 //                response.addCookie(userName);
-                response.sendRedirect(baseURL + "pages/dashboard.jsp");
+//                response.sendRedirect(baseURL + "pages/dashboard.jsp");
+                response.sendRedirect(baseURL + "PromotionServlet?get=all");
                 return;
             } else {
                 isInvalid = true;
@@ -103,7 +105,8 @@ public class LoginServlet extends HttpServlet {
                 request.getSession().setAttribute("user_id", user.getId());
                 request.getSession().setAttribute("role", "sectionmanager");
                 request.getSession().setMaxInactiveInterval(30*60);
-                response.sendRedirect(baseURL + "pages/dashboard.jsp");
+//                response.sendRedirect(baseURL + "pages/dashboard.jsp");
+                response.sendRedirect(baseURL + "PromotionServlet?get=all");
                 return;
             } else {
                 isInvalid = true;
