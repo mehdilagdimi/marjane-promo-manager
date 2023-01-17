@@ -32,12 +32,12 @@ Travail demandé par Marjane :
 
 
 ## Statistics Page : Admin Dashboard
-![MarjanePlat](/prjct imgs/statistics.png)
+![MarjanePlat](https://imgur.com/mRmdVFW)
 ## List of promotions : Admin Dashboard
-![MarjanePlat](/prjct imgs/promotion.png)
+![MarjanePlat](https://imgur.com/09oTbFL)
 ## Market Manager Dashboard
-![MarjanePlat](/prjct imgs/managerdashbrd.png)
+![MarjanePlat](https://imgur.com/qRnupaK)
 ## Section Manager Dashboard
-![MarjanePlat](/prjct imgs/sectionmanagerdashbrd.png)
+![MarjanePlat](https://imgur.com/H4K3N3i)
 ## Login Page
-![MarjanePlat](/prjct imgs/login.png)
+![MarjanePlat](https://imgur.com/nvpbsiy)
