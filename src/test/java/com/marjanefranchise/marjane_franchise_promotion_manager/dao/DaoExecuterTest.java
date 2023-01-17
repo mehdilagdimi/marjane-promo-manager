@@ -71,4 +71,12 @@ class DaoExecuterTest {
     }
 
 
+    @Test
+    void testOrphanRemovalSubCategoryWithCategory() {
+        DaoExecuter<Category> daoExecuter = new DaoExecuter<>(Category.class);
+        Category category = daoExecuter.find(3);
+
+        category.getSubCategories().clear();
+        daoExecuter.update(category);
+    }
 }
