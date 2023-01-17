@@ -8,7 +8,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 
-public class HashUtil {
+public class  HashUtil {
 
     public static String hashPassword(String passw){
         String base64encodedPassword = Base64.getEncoder().encodeToString(generatePBKDF2(passw));

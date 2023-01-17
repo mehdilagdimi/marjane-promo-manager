@@ -29,3 +29,15 @@ Travail demandé par Marjane :
     Ajouter une base de données PostgreSQL adéquate au système
     
     Organiser votre projet avec un outil de votre choix
+
+
+## Statistics Page : Admin Dashboard
+![MarjanePlat](./prjct imgs/statistics.png)
+## List of promotions : Admin Dashboard
+![MarjanePlat](./prjct imgs/promotion.png)
+## Market Manager Dashboard
+![MarjanePlat](./prjct imgs/managerdashbrd.png)
+## Section Manager Dashboard
+![MarjanePlat](./prjct imgs/sectionmanagerdashbrd.png)
+## Login Page
+![MarjanePlat](prjct imgs/login.png)
